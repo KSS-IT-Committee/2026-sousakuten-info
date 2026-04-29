@@ -64,7 +64,10 @@ Use **PascalCase**.
 
 ```typescript
 type UserProfile = { name: string; age: number };
-interface EventData { title: string; date: Date; }
+interface EventData {
+  title: string;
+  date: Date;
+}
 ```
 
 ### Functions
@@ -155,12 +158,16 @@ Always use **strict equality operators (`===`, `!==`)**.
 
 ```typescript
 // ✅ Correct
-if (value === null) { }
-if (count !== 0) { }
+if (value === null) {
+}
+if (count !== 0) {
+}
 
 // ❌ Incorrect
-if (value == null) { }
-if (count != 0) { }
+if (value == null) {
+}
+if (count != 0) {
+}
 ```
 
 ## Prettier Configuration
