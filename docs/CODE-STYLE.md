@@ -210,6 +210,6 @@ npm run format       # Auto-format
 - **Naming Conventions**: PascalCase (types, components), camelCase (functions, variables), UPPER_CASE (constants)
 - **Boolean Variables**: is/has/can prefix required
 - **Equality Operators**: Always use `===` / `!==`
-- **Import Order**: React → External → Internal → Relative → CSS
+- **Import Order**: Side effects → React/Next.js → External → Internal (`@/`) → Relative → CSS
 
 ESLint and Prettier will automatically apply these rules, so run `npm run lint:fix` and `npm run format` to auto-fix.
