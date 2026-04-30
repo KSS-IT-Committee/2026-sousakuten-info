@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   integer,
+  pgEnum,
   pgTable,
   serial,
   text,
@@ -8,10 +9,22 @@ import {
   unique,
 } from "drizzle-orm/pg-core";
 
+export const CLASSES = [
+  "1A", "1B", "1C", "1D",
+  "2A", "2B", "2C", "2D",
+  "3A", "3B", "3C", "3D",
+  "4A", "4B", "4C", "4D",
+  "5A", "5B", "5C", "5D",
+  "6A", "6B", "6C", "6D",
+] as const;
+
+export type ClassName = (typeof CLASSES)[number];
+export const classEnum = pgEnum("class_name", CLASSES);
+
 // 減点クラスDB — per-class deductions (issue #3)
 export const deductions = pgTable("deductions", {
   id: serial("id").primaryKey(),
-  className: text("class_name").notNull(),
+  className: classEnum("class_name").notNull(),
   content: text("content").notNull(),
   points: integer("points").notNull(),
   occurredAt: timestamp("occurred_at", { withTimezone: true })
@@ -37,7 +50,7 @@ export const announcementClasses = pgTable(
     announcementId: integer("announcement_id")
       .notNull()
       .references(() => announcements.id, { onDelete: "cascade" }),
-    className: text("class_name").notNull(),
+    className: classEnum("class_name").notNull(),
   },
   (table) => [unique().on(table.announcementId, table.className)],
 );
