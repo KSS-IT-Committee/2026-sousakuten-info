@@ -34,12 +34,8 @@
           "name": "announcement_classes_announcement_id_announcements_id_fk",
           "tableFrom": "announcement_classes",
           "tableTo": "announcements",
-          "columnsFrom": [
-            "announcement_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["announcement_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -49,10 +45,7 @@
         "announcement_classes_announcement_id_class_name_unique": {
           "name": "announcement_classes_announcement_id_class_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "announcement_id",
-            "class_name"
-          ]
+          "columns": ["announcement_id", "class_name"]
         }
       },
       "policies": {},
