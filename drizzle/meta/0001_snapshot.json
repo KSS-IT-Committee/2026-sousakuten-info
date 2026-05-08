@@ -1,0 +1,181 @@
+{
+  "id": "c62c1862-e278-4e20-aaa3-7f8179300915",
+  "prevId": "2e604007-d906-4cfe-a34e-09db668cfd6d",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.announcement_classes": {
+      "name": "announcement_classes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "announcement_id": {
+          "name": "announcement_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "class_name": {
+          "name": "class_name",
+          "type": "class_name",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "announcement_classes_announcement_id_announcements_id_fk": {
+          "name": "announcement_classes_announcement_id_announcements_id_fk",
+          "tableFrom": "announcement_classes",
+          "tableTo": "announcements",
+          "columnsFrom": ["announcement_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "announcement_classes_announcement_id_class_name_unique": {
+          "name": "announcement_classes_announcement_id_class_name_unique",
+          "nullsNotDistinct": false,
+          "columns": ["announcement_id", "class_name"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.announcements": {
+      "name": "announcements",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.deductions": {
+      "name": "deductions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "class_name": {
+          "name": "class_name",
+          "type": "class_name",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "points": {
+          "name": "points",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "occurred_at": {
+          "name": "occurred_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.class_name": {
+      "name": "class_name",
+      "schema": "public",
+      "values": [
+        "1A",
+        "1B",
+        "1C",
+        "1D",
+        "2A",
+        "2B",
+        "2C",
+        "2D",
+        "3A",
+        "3B",
+        "3C",
+        "3D",
+        "4A",
+        "4B",
+        "4C",
+        "4D",
+        "5A",
+        "5B",
+        "5C",
+        "5D",
+        "6A",
+        "6B",
+        "6C",
+        "6D"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
