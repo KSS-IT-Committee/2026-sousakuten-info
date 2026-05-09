@@ -1,6 +1,6 @@
 "use client";
-import { List } from "@/app/components/List";
-import { Select } from "@/app/components/Select";
+import { List } from "@/components/List";
+import { Select } from "@/components/Select";
 
 export default function Home() {
   const grades = ["1", "2", "3", "4", "5", "6"].map((g) => ({
@@ -18,9 +18,9 @@ export default function Home() {
       <Select options={grades} onChange={(value) => {}} />
       <Select options={classes} onChange={(value) => {}} />
       <h2>お知らせ</h2>
-      {/* <List /> */}
+      <List />
       <h2>減点状況</h2>
-      {/* <List /> */}
+      <List />
     </>
   );
 }
