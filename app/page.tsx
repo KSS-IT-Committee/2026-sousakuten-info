@@ -1,8 +1,13 @@
 "use client";
 import { List } from "@/components/List";
 import { Select } from "@/components/Select";
+import { AnnouncementsReturn } from "@/db/getAnnouncements";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [grade, setGrade] = useState("1");
+  const [className, setClassName] = useState("A");
+  const [announcements, setAnnouncements] = useState<AnnouncementsReturn>([]);
   const grades = ["1", "2", "3", "4", "5", "6"].map((g) => ({
     value: g,
     label: `${g}年`,
@@ -11,16 +16,21 @@ export default function Home() {
     value: c,
     label: `${c}組`,
   }));
+  useEffect(() => {
+    fetch(`/api/announcements?className=${grade}${className}`)
+      .then((res) => res.json())
+      .then(setAnnouncements);
+  }, [grade, className]);
 
   return (
     <>
       <h1>情報伝達ページ</h1>
-      <Select options={grades} onChange={(value) => {}} />
-      <Select options={classes} onChange={(value) => {}} />
+      <Select options={grades} onChange={setGrade} />
+      <Select options={classes} onChange={setClassName} />
       <h2>お知らせ</h2>
-      <List />
+      <List items={announcements} />
       <h2>減点状況</h2>
-      <List />
+      <List items={[]} />
     </>
   );
 }

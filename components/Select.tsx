@@ -9,12 +9,12 @@ type SelectProp = {
   onChange: (value: string) => void;
 };
 
-export function Select(arg: SelectProp) {
+export function Select({ label, options, onChange }: SelectProp) {
   return (
     <label>
-      {arg.label ?? ""}
-      <select onChange={(e) => arg.onChange(e.target.value)}>
-        {arg.options.map(({ value, label }) => (
+      {label ?? ""}
+      <select onChange={(e) => onChange(e.target.value)}>
+        {options.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}
           </option>
