@@ -38,6 +38,9 @@ export const CLASSES = [
 
 export type ClassName = (typeof CLASSES)[number];
 export const classEnum = pgEnum("class_name", CLASSES);
+export const isClassName = (value: string) => {
+  return (CLASSES as readonly string[]).includes(value);
+};
 
 // 減点クラスDB — per-class deductions (issue #3)
 export const deductions = pgTable("deductions", {

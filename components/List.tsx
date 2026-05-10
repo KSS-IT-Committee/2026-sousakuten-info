@@ -12,17 +12,21 @@ export function List({ items }: ListProp) {
       {items.map(({ date, title, link }, i) => {
         if (link) {
           return (
-            <a key={i} href={link}>
-              <span>{format(date)}</span>
-              {title}
-            </a>
+            <div key={i}>
+              <a href={link}>
+                <span>{format(date)}</span>
+                {title}
+              </a>
+            </div>
           );
         } else {
           return (
-            <span key={i}>
-              <span>{format(date)}</span>
-              {title}
-            </span>
+            <div key={i}>
+              <span key={i}>
+                <span>{format(date)}</span>
+                {title}
+              </span>
+            </div>
           );
         }
       })}
@@ -31,5 +35,5 @@ export function List({ items }: ListProp) {
 }
 
 const format = (date: Date) => {
-  return date.toLocaleDateString();
+  return new Date(date).toLocaleDateString();
 };

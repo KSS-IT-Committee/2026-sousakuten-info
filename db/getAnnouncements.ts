@@ -5,7 +5,6 @@ import { announcementClasses, announcements, ClassName } from "./schema";
 export type AnnouncementsReturn = {
   id: number;
   title: string;
-  body: string;
   date: Date;
 }[];
 
@@ -14,7 +13,6 @@ export async function getAnnouncements(className: ClassName) {
     .select({
       id: announcements.id,
       title: announcements.title,
-      body: announcements.body,
       date: announcements.createdAt,
     })
     .from(announcementClasses)
