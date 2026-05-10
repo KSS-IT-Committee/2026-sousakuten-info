@@ -16,6 +16,7 @@ export default async function InfoPage({ params }: Props) {
   return (
     <main>
       <h2>{info[0].title}</h2>
+      <p>{info[0].createdAt.toLocaleDateString()}</p>
       <p>{info[0].body}</p>
     </main>
   );
