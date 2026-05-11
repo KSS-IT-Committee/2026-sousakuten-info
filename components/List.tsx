@@ -1,20 +1,23 @@
+import { DateFormat } from "./DateFormat";
+
 type ListProp = {
   items: {
+    id: number;
     date: Date;
     title: string;
-    link?: string;
   }[];
+  link?: string;
 };
 
-export function List({ items }: ListProp) {
+export function List({ items, link }: ListProp) {
   return (
     <div>
-      {items.map(({ date, title, link }, i) => {
+      {items.map(({ id, date, title }, i) => {
         if (link) {
           return (
             <div key={i}>
-              <a href={link}>
-                <span>{format(date)}</span>
+              <a href={`${link}${id}`}>
+                <span>{DateFormat(date)}</span>
                 {title}
               </a>
             </div>
@@ -23,7 +26,7 @@ export function List({ items }: ListProp) {
           return (
             <div key={i}>
               <span key={i}>
-                <span>{format(date)}</span>
+                <span>{DateFormat(date)}</span>
                 {title}
               </span>
             </div>
@@ -33,7 +36,3 @@ export function List({ items }: ListProp) {
     </div>
   );
 }
-
-const format = (date: Date) => {
-  return new Date(date).toLocaleDateString();
-};
