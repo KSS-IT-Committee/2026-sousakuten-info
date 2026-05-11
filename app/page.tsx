@@ -28,7 +28,7 @@ export default function Home() {
       <Select options={grades} onChange={setGrade} />
       <Select options={classes} onChange={setClassName} />
       <h2>お知らせ</h2>
-      <List items={announcements} />
+      <List items={announcements} link="/info/" />
       <h2>減点状況</h2>
       <List items={[]} />
     </>

@@ -20,6 +20,7 @@ export default function Info() {
         classes: classes,
       }),
     });
+    window.location.reload()
   };
 
   return (

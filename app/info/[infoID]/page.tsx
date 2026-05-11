@@ -1,3 +1,5 @@
+import { DateFormat } from "@/components/DateFormat";
+import { MultiLine } from "@/components/MultiLine";
 import { getInfo } from "@/db/getInfo";
 import { notFound } from "next/navigation";
 
@@ -16,8 +18,10 @@ export default async function InfoPage({ params }: Props) {
   return (
     <main>
       <h2>{info[0].title}</h2>
-      <p>{info[0].createdAt.toLocaleDateString()}</p>
-      <p>{info[0].body}</p>
+      <p>{DateFormat(info[0].createdAt)}</p>
+      <p>
+        <MultiLine body={info[0].body} />
+      </p>
     </main>
   );
 }
