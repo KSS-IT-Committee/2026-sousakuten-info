@@ -1,7 +1,8 @@
 "use client";
 
-import { ClassName, SelectClasses } from "@/components/SelectClasses";
 import { useRef, useState } from "react";
+
+import { ClassName, SelectClasses } from "@/components/SelectClasses";
 
 export default function Info() {
   const [classes, setClasses] = useState<ClassName[]>([]);

@@ -1,8 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
+
 import { List } from "@/components/List";
 import { Select } from "@/components/Select";
 import { AnnouncementsReturn } from "@/db/getAnnouncements";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const [grade, setGrade] = useState("1");

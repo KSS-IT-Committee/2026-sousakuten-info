@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+
 import { announcementClasses, announcements, ClassName } from "./schema";
 
 export type AddAnnouncementsProps = {
