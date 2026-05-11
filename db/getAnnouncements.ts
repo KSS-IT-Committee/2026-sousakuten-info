@@ -1,5 +1,7 @@
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
+
 import { announcementClasses, announcements, ClassName } from "./schema";
 
 export type AnnouncementsReturn = {

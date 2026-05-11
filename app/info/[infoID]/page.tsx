@@ -1,7 +1,8 @@
+import { notFound } from "next/navigation";
+
 import { DateFormat } from "@/components/DateFormat";
 import { MultiLine } from "@/components/MultiLine";
 import { getInfo } from "@/db/getInfo";
-import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{
