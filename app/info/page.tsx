@@ -1,43 +1,28 @@
-"use client";
+import {
+  AnnouncementsReturn,
+  getAllAnnouncements,
+} from "@/db/getAllAnnouncements";
+import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
+import { DateFormat } from "@/lib/DateFormat";
 
-import { useRef, useState } from "react";
-
-import { ClassName, SelectClasses } from "@/components/SelectClasses";
-
-export default function Info() {
-  const [classes, setClasses] = useState<ClassName[]>([]);
-  const title = useRef<HTMLInputElement>(null);
-  const body = useRef<HTMLTextAreaElement>(null);
-
-  const addAnnouncement = () => {
-    fetch("/api/announcements", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title?.current?.value,
-        body: body?.current?.value,
-        classes: classes,
-      }),
-    });
-    window.location.reload();
-  };
-
+export default async function Info() {
+  const announcements = await getAllAnnouncements();
   return (
     <>
-      <h2>お知らせを追加</h2>
-      <div>
-        <div>タイトル</div>
-        <input ref={title} type="text" placeholder="タイトルを入力" />
-      </div>
-      <div>
-        <div>内容</div>
-        <textarea ref={body} placeholder="お知らせ内容を入力"></textarea>
-      </div>
-      <h3>対象クラス</h3>
-      <SelectClasses value={classes} onChange={setClasses} />
-      <button onClick={addAnnouncement}>追加</button>
+      <h2>お知らせ一覧</h2>
+      {announcements.map(
+        async ({ id, title, date }: AnnouncementsReturn, i) => (
+          <div key={i}>
+            <a href={`/info/${id}`}>
+              {DateFormat(date)}
+              {title}
+              {(await getAnnouncementClasses(id)).map((className, ci) => (
+                <span key={ci}>{className}</span>
+              ))}
+            </a>
+          </div>
+        ),
+      )}
     </>
   );
 }

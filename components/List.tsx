@@ -1,4 +1,4 @@
-import { DateFormat } from "./DateFormat";
+import { DateFormat } from "@/lib/DateFormat";
 
 type ListProp = {
   items: {

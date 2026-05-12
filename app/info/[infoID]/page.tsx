@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 
-import { DateFormat } from "@/components/DateFormat";
 import { MultiLine } from "@/components/MultiLine";
+import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
+import { DateFormat } from "@/lib/DateFormat";
 
 type Props = {
   params: Promise<{
@@ -27,6 +28,10 @@ export default async function InfoPage({ params }: Props) {
       <p>
         <MultiLine body={info[0].body} />
       </p>
+      <h3>対象クラス</h3>
+      {(await getAnnouncementClasses(id)).map((className, i) => (
+        <span key={i}>{className}</span>
+      ))}
     </main>
   );
 }
