@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+
 import { announcements } from "./schema";
 
 export type AnnouncementsReturn = {
