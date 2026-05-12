@@ -12,7 +12,11 @@ type Props = {
 
 export default async function InfoPage({ params }: Props) {
   const { infoID } = await params;
-  const info = await getInfo(Number(infoID));
+  const id = Number(infoID);
+  if (isNaN(id) || id <= 0) {
+    return notFound();
+  }
+  const info = await getInfo(id);
   if (info.length === 0) {
     return notFound();
   }
