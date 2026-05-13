@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+import { Footer } from "@/components/Footer";
 import { List } from "@/components/List";
 import { Select } from "@/components/Select";
 import { AnnouncementsReturn } from "@/db/getAnnouncements";
@@ -32,6 +33,7 @@ export default function Home() {
       <List items={announcements} link="/info/" />
       <h2>減点状況</h2>
       <List items={[]} />
+      <Footer />
     </>
   );
 }
