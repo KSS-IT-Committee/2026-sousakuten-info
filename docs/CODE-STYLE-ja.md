@@ -80,7 +80,7 @@
 ※ `Next.js App Router` を前提とする.
 
 - ファイル名は`page.tsx`とする.
-- `export default function <PageName>Page()`を含むこと.
+- `export default function <PageName>()`を含むこと.
 - `<PageName>`はファイルの親ディレクトリ名を使用し,[PascalCase]を用いる.
 
 ---
