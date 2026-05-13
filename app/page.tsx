@@ -1,5 +1,5 @@
-import { DefaultFooter } from "@/app/components/footer";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  return <DefaultFooter />;
+  return <Footer />;
 }
