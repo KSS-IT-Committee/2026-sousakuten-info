@@ -1,3 +1,5 @@
+import { desc } from "drizzle-orm";
+
 import { db } from "@/lib/db";
 
 import { announcements } from "./schema";
@@ -15,6 +17,7 @@ export async function getAllAnnouncements() {
       title: announcements.title,
       date: announcements.createdAt,
     })
-    .from(announcements);
+    .from(announcements)
+    .orderBy(desc(announcements.createdAt));
   return result;
 }
