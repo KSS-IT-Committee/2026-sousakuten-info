@@ -92,7 +92,8 @@
 
 コンポーネントファイルを作成する場合,
 
-- ファイル名は`<ComponentName>.tsx`とする.
+- ファイル名は`index.tsx`とする.
+- `/components/<ComponentName>/`に置く.
 - 名前付きエクスポートを用いる.
 - `export function <ComponentName>()`を含むこと.
 
@@ -119,7 +120,7 @@
 #### コンポーネント用スタイル
 
 - ファイル名は`<ComponentName>.module.css`とする.
-- `/src/styles/`に置く.
+- `/components/<ComponentName>/`に置く.
 - `<ComponentName>`は[PascalCase]を用いる.
 
 ---
@@ -148,7 +149,7 @@ import styles from "./<page-name>.module.css";
 または
 
 ```js
-import styles from "@/styles/<ComponentName>.module.css";
+import styles from "./<ComponentName>.module.css";
 ```
 
 ---
