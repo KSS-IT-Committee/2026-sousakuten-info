@@ -1,15 +1,12 @@
 "use client";
 import { useState } from "react";
 
-const GRADES = ["1", "2", "3", "4", "5", "6"] as const;
-const CLASSES = ["A", "B", "C", "D"] as const;
+import { Class, CLASSES, ClassName, Grade, GRADES } from "@/lib/classes";
+
 const ALLCLASSES = GRADES.flatMap((g) =>
   CLASSES.map((c) => `${g}${c}` as ClassName),
 );
 
-type Grade = (typeof GRADES)[number];
-type Classes = (typeof CLASSES)[number];
-export type ClassName = `${(typeof GRADES)[number]}${(typeof CLASSES)[number]}`;
 type SelectClassesProps = {
   value?: ClassName[];
   onChange: (selected: ClassName[]) => void;
@@ -35,7 +32,7 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
     }
   };
 
-  const toggleClassGroup = (className: Classes, checked: boolean) => {
+  const toggleClassGroup = (className: Class, checked: boolean) => {
     const targets = GRADES.map((g) => `${g}${className}` as ClassName);
     if (checked) {
       update([...new Set([...selected, ...targets])]);

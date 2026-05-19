@@ -5,6 +5,7 @@ import {
   getAllAnnouncements,
 } from "@/db/getAllAnnouncements";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
+import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
 
 export default async function Info() {
@@ -18,9 +19,11 @@ export default async function Info() {
             <a href={`/info/${id}`}>
               {dateFormat(date)}
               {title}
-              {(await getAnnouncementClasses(id)).map((className, ci) => (
-                <span key={ci}>{className}</span>
-              ))}
+              {classFormat(await getAnnouncementClasses(id)).map(
+                (className, ci) => (
+                  <span key={ci}>{className}</span>
+                ),
+              )}
             </a>
           </div>
         ),

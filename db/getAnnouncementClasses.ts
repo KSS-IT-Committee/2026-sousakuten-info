@@ -1,8 +1,9 @@
 import { eq } from "drizzle-orm";
 
+import { ClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
 
-import { announcementClasses, ClassName } from "./schema";
+import { announcementClasses } from "./schema";
 
 export async function getAnnouncementClasses(id: number) {
   const records: { className: ClassName }[] = await db

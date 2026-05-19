@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 
-import { ClassName, SelectClasses } from "@/components/SelectClasses";
+import { SelectClasses } from "@/components/SelectClasses";
+import { ClassName } from "@/lib/classes";
 
 export default function AddInfo() {
   const [classes, setClasses] = useState<ClassName[]>([]);

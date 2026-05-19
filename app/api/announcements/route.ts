@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 import { addAnnouncements, AddAnnouncementsProps } from "@/db/addAnnouncements";
 import { getAnnouncements } from "@/db/getAnnouncements";
-import { ClassName, isClassName } from "@/db/schema";
+import { ClassName, isClassName } from "@/lib/classes";
 
 export async function GET(req: NextRequest) {
   const className = req.nextUrl.searchParams.get("className");
