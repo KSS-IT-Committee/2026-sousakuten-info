@@ -5,7 +5,7 @@ import {
   getAllAnnouncements,
 } from "@/db/getAllAnnouncements";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
-import { DateFormat } from "@/lib/DateFormat";
+import { dateFormat } from "@/lib/date-format";
 
 export default async function Info() {
   const announcements = await getAllAnnouncements();
@@ -16,7 +16,7 @@ export default async function Info() {
         async ({ id, title, date }: AnnouncementsReturn, i) => (
           <div key={i}>
             <a href={`/info/${id}`}>
-              {DateFormat(date)}
+              {dateFormat(date)}
               {title}
               {(await getAnnouncementClasses(id)).map((className, ci) => (
                 <span key={ci}>{className}</span>

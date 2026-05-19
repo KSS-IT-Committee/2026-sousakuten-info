@@ -9,8 +9,16 @@ export async function GET(req: NextRequest) {
   if (className === null || !isClassName(className)) {
     return Response.json([]);
   }
-  const announcements = await getAnnouncements(className as ClassName);
-  return Response.json(announcements);
+  try {
+    const announcements = await getAnnouncements(className as ClassName);
+    return Response.json(announcements);
+  } catch (error) {
+    console.error("Failed to get announcements:", error);
+    return Response.json(
+      { error: "Failed to get announcement" },
+      { status: 500 },
+    );
+  }
 }
 
 type PostBody = {
@@ -32,8 +40,14 @@ export async function POST(req: NextRequest) {
   if (classes.some((v) => !isClassName(v))) {
     return Response.json({ error: "Invalid class name" }, { status: 400 });
   }
-  await addAnnouncements({ title, body, classes } as AddAnnouncementsProps);
-  return Response.json({
-    success: true,
-  });
+  try {
+    await addAnnouncements({ title, body, classes } as AddAnnouncementsProps);
+    return Response.json({ success: true });
+  } catch (error) {
+    console.error("Failed to get announcements:", error);
+    return Response.json(
+      { error: "Failed to add announcement" },
+      { status: 500 },
+    );
+  }
 }

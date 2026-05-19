@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
-import { DateFormat } from "@/lib/DateFormat";
+import { dateFormat } from "@/lib/date-format";
 
 type Props = {
   params: Promise<{
@@ -24,7 +24,7 @@ export default async function InfoPage({ params }: Props) {
   return (
     <main>
       <h2>{info[0].title}</h2>
-      <p>{DateFormat(info[0].createdAt)}</p>
+      <p>{dateFormat(info[0].createdAt)}</p>
       <p>
         <MultiLine body={info[0].body} />
       </p>

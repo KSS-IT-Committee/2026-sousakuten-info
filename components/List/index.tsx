@@ -1,4 +1,4 @@
-import { DateFormat } from "@/lib/DateFormat";
+import { dateFormat } from "@/lib/date-format";
 
 type ListProp = {
   items: {
@@ -6,33 +6,38 @@ type ListProp = {
     date: Date;
     title: string;
   }[];
+  emptyMessage: string;
   link?: string;
 };
 
-export function List({ items, link }: ListProp) {
+export function List({ items, emptyMessage, link }: ListProp) {
   return (
     <div>
-      {items.map(({ id, date, title }, i) => {
-        if (link) {
-          return (
-            <div key={i}>
-              <a href={`${link}${id}`}>
-                <span>{DateFormat(date)}</span>
-                {title}
-              </a>
-            </div>
-          );
-        } else {
-          return (
-            <div key={i}>
-              <span key={i}>
-                <span>{DateFormat(date)}</span>
-                {title}
-              </span>
-            </div>
-          );
-        }
-      })}
+      {items.length !== 0 ? (
+        items.map(({ id, date, title }, i) => {
+          if (link) {
+            return (
+              <div key={i}>
+                <a href={`${link}${id}`}>
+                  <span>{dateFormat(date)}</span>
+                  {title}
+                </a>
+              </div>
+            );
+          } else {
+            return (
+              <div key={i}>
+                <span key={i}>
+                  <span>{dateFormat(date)}</span>
+                  {title}
+                </span>
+              </div>
+            );
+          }
+        })
+      ) : (
+        <div>{emptyMessage}</div>
+      )}
     </div>
   );
 }
