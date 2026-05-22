@@ -32,8 +32,11 @@ export async function POST(req: NextRequest) {
   const { title, body, classes } = json;
   if (
     typeof title !== "string" ||
+    title.length === 0 ||
     typeof body !== "string" ||
-    !Array.isArray(classes)
+    body.length === 0 ||
+    !Array.isArray(classes) ||
+    classes.length === 0
   ) {
     return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
