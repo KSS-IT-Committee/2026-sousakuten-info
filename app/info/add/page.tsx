@@ -11,7 +11,7 @@ export default function AddInfo() {
   const body = useRef<HTMLTextAreaElement>(null);
 
   const addAnnouncement = async () => {
-    await fetch("/api/announcements", {
+    const res = await fetch("/api/announcements", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,10 @@ export default function AddInfo() {
         classes: classes,
       }),
     });
-    window.location.reload();
+    if (!res.ok) {
+      alert("お知らせの追加に失敗しました");
+      return;
+    }
   };
 
   return (

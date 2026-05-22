@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { dateFormat } from "@/lib/date-format";
 
 type ListProp = {
@@ -18,10 +20,10 @@ export function List({ items, emptyMessage, link }: ListProp) {
           if (link) {
             return (
               <div key={i}>
-                <a href={`${link}${id}`}>
+                <Link href={`${link}${id}`}>
                   <span>{dateFormat(date)}</span>
                   {title}
-                </a>
+                </Link>
               </div>
             );
           } else {

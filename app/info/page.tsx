@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import Link from "next/link";
+
 import {
   AnnouncementsReturn,
   getAllAnnouncements,
@@ -16,7 +18,7 @@ export default async function Info() {
       {announcements.map(
         async ({ id, title, date }: AnnouncementsReturn, i) => (
           <div key={i}>
-            <a href={`/info/${id}`}>
+            <Link href={`/info/${id}`}>
               {dateFormat(date)}
               {title}
               {classFormat(await getAnnouncementClasses(id)).map(
@@ -24,7 +26,7 @@ export default async function Info() {
                   <span key={ci}>{className}</span>
                 ),
               )}
-            </a>
+            </Link>
           </div>
         ),
       )}
