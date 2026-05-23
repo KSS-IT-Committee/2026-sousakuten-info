@@ -1,5 +1,3 @@
-// export const dynamic = "force-dynamic";
-
 import Link from "next/link";
 
 import {
@@ -9,6 +7,8 @@ import {
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
+
+export const dynamic = "force-dynamic";
 
 export default async function Info() {
   const announcements = await getAllAnnouncements();
