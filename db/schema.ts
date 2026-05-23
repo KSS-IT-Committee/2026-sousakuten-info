@@ -1,5 +1,7 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
+  check,
+  index,
   integer,
   pgEnum,
   pgTable,
@@ -45,6 +47,43 @@ export const announcementClasses = pgTable(
     className: classEnum("class_name").notNull(),
   },
   (table) => [unique().on(table.announcementId, table.className)],
+);
+
+// 備品DB
+export const Equipments = pgTable(
+  "equipments",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    quantity: integer("quantity").notNull(),
+    picture: text("picture"),
+  },
+  (table) => [check("quantity_positive", sql`${table.quantity} > 0`)],
+);
+
+// 備品貸出DB
+export const Borrowings = pgTable(
+  "borrowings",
+  {
+    id: serial("id").primaryKey(),
+    equipmentId: integer("equipment_id")
+      .notNull()
+      .references(() => Equipments.id),
+    // tagNumber: integer("tag_number").notNull(),
+    class: integer("class").notNull(),
+    borrowedAt: timestamp("borrowed_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    returnedAt: timestamp("returned_at", { withTimezone: true }),
+  },
+  (table) => [
+    index("equipment_idx").on(table.equipmentId),
+    index("class_idx").on(table.class),
+    check(
+      "returned_at_after_borrowed_at",
+      sql`${table.returnedAt} IS NULL OR ${table.returnedAt} >= ${table.borrowedAt}`,
+    ),
+  ],
 );
 
 export const announcementsRelations = relations(announcements, ({ many }) => ({
