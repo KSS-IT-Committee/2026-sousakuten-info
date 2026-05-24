@@ -7,11 +7,11 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
+  console.error("Page error:", error);
   return (
     <div>
       <h1>エラー</h1>
       <p>エラーが発生しました。</p>
-      <pre>{error.message}</pre>
       <button onClick={reset}>再試行</button>
     </div>
   );

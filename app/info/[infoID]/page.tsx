@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
+import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
 
 type Props = {
@@ -29,7 +30,7 @@ export default async function InfoPage({ params }: Props) {
         <MultiLine body={info[0].body} />
       </p>
       <h3>対象クラス</h3>
-      {(await getAnnouncementClasses(id)).map((className, i) => (
+      {classFormat(await getAnnouncementClasses(id)).map((className, i) => (
         <span key={i}>{className}</span>
       ))}
     </main>

@@ -24,6 +24,9 @@ export async function addAnnouncements({
       id: announcements.id,
     });
   const id = inserted[0].id;
+  if (id === undefined) {
+    return;
+  }
   await db.insert(announcementClasses).values(
     classes.map((c) => ({
       announcementId: id,

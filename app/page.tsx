@@ -20,7 +20,7 @@ export default function Home() {
   }));
   useEffect(() => {
     const controller = new AbortController();
-    
+
     fetch(`/api/announcements?className=${grade}${className}`, {
       signal: controller.signal,
     })
@@ -32,7 +32,7 @@ export default function Home() {
           setAnnouncements([]);
         }
       });
-    
+
     return () => controller.abort();
   }, [grade, className]);
 
