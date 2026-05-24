@@ -5,16 +5,14 @@ import { getAllAnnouncements } from "@/db/getAllAnnouncements";
 import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
 
-export const dynamic = "force-dynamic";
-
 export default async function Info() {
   const announcements = await getAllAnnouncements();
   const classes = await getAllAnnouncementClasses();
   return (
     <>
       <h2>お知らせ一覧</h2>
-      {announcements.map(async ({ id, title, date }, i) => (
-        <div key={i}>
+      {announcements.map(({ id, title, date }) => (
+        <div key={id}>
           <Link href={`/info/${id}`}>
             {dateFormat(date)}
             {title}

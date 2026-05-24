@@ -31,8 +31,13 @@ type PostBody = {
 };
 
 export async function POST(req: NextRequest) {
-  const json = (await req.json()) as PostBody;
-  const { title, body, classes } = json;
+  let json: unknown;
+  try {
+    json = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid request" }, { status: 400 });
+  }
+  const { title, body, classes } = json as PostBody;
   if (
     typeof title !== "string" ||
     title.length === 0 ||
