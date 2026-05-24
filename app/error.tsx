@@ -1,13 +1,6 @@
 "use client";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
-  console.error("Page error:", error.message);
+export default function Error({ reset }: { reset: () => void }) {
   return (
     <div>
       <h1>エラー</h1>
