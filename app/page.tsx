@@ -19,9 +19,21 @@ export default function Home() {
     label: `${c}組`,
   }));
   useEffect(() => {
-    fetch(`/api/announcements?className=${grade}${className}`)
+    const controller = new AbortController();
+    
+    fetch(`/api/announcements?className=${grade}${className}`, {
+      signal: controller.signal,
+    })
       .then((res) => res.json())
-      .then(setAnnouncements);
+      .then(setAnnouncements)
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          console.error("Failed to fetch announcements:", error);
+          setAnnouncements([]);
+        }
+      });
+    
+    return () => controller.abort();
   }, [grade, className]);
 
   return (
