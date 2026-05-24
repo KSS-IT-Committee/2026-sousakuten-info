@@ -29,7 +29,7 @@ export function List({ items, emptyMessage, link }: ListProp) {
           } else {
             return (
               <div key={i}>
-                <span key={i}>
+                <span>
                   <span>{dateFormat(date)}</span>
                   {title}
                 </span>

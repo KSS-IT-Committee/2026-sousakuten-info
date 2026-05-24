@@ -7,7 +7,10 @@ import { ClassName, isClassName } from "@/lib/classes";
 export async function GET(req: NextRequest) {
   const className = req.nextUrl.searchParams.get("className");
   if (className === null || !isClassName(className)) {
-    return Response.json([]);
+    return Response.json(
+      { error: "Invalid class name", field: "className" },
+      { status: 400 },
+    );
   }
   try {
     const announcements = await getAnnouncements(className as ClassName);
