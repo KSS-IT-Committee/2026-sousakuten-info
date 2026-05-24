@@ -7,7 +7,7 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  console.error("Page error:", error);
+  console.error("Page error:", error.message);
   return (
     <div>
       <h1>エラー</h1>
