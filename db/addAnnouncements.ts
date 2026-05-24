@@ -14,23 +14,21 @@ export async function addAnnouncements({
   body,
   classes,
 }: AddAnnouncementsProps) {
-  const inserted = await db
-    .insert(announcements)
-    .values({
-      title,
-      body,
-    })
-    .returning({
-      id: announcements.id,
-    });
-  const id = inserted[0].id;
-  if (id === undefined) {
-    return;
-  }
-  await db.insert(announcementClasses).values(
-    classes.map((c) => ({
-      announcementId: id,
-      className: c,
-    })),
-  );
+  await db.transaction(async (tx) => {
+    const [announcement] = await tx
+      .insert(announcements)
+      .values({
+        title,
+        body,
+      })
+      .returning({
+        id: announcements.id,
+      });
+    await tx.insert(announcementClasses).values(
+      classes.map((c) => ({
+        announcementId: announcement.id,
+        className: c,
+      })),
+    );
+  });
 }
