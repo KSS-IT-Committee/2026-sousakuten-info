@@ -31,14 +31,14 @@ export default function AddInfo() {
   return (
     <>
       <h2>お知らせを追加</h2>
-      <div>
-        <div>タイトル</div>
+      <label>
+        タイトル
         <input ref={title} type="text" placeholder="タイトルを入力" />
-      </div>
-      <div>
-        <div>内容</div>
+      </label>
+      <label>
+        内容
         <textarea ref={body} placeholder="お知らせ内容を入力"></textarea>
-      </div>
+      </label>
       <h3>対象クラス</h3>
       <SelectClasses value={classes} onChange={setClasses} />
       <button onClick={addAnnouncement}>追加</button>
