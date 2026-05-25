@@ -1,6 +1,6 @@
 import { CLASSES, ClassName, CLASSNAMES, GRADES } from "@/lib/classes";
 export const classFormat = (classes: ClassName[]) => {
-  if (classes.length === CLASSNAMES.length) {
+  if (CLASSNAMES.every((className) => classes.includes(className))) {
     return ["全クラス"];
   }
   const grades: string[] = [];

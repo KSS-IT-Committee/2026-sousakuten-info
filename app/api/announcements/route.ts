@@ -37,7 +37,8 @@ export async function POST(req: NextRequest) {
   } catch {
     return Response.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { title, body, classes } = json as PostBody;
+  const { title, body, classes: classes_list } = json as PostBody;
+  const classes = Array.from(new Set(classes_list));
   if (
     typeof title !== "string" ||
     title.length === 0 ||

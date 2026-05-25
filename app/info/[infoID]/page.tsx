@@ -19,15 +19,15 @@ export default async function InfoPage({ params }: Props) {
     return notFound();
   }
   const info = await getInfo(id);
-  if (info.length === 0) {
+  if (info === undefined) {
     return notFound();
   }
   return (
     <main>
-      <h2>{info[0].title}</h2>
-      <p>{dateFormat(info[0].createdAt)}</p>
+      <h2>{info.title}</h2>
+      <p>{dateFormat(info.createdAt)}</p>
       <p>
-        <MultiLine body={info[0].body} />
+        <MultiLine body={info.body} />
       </p>
       <h3>対象クラス</h3>
       {classFormat(await getAnnouncementClasses(id)).map((className, i) => (

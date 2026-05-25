@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 import { ClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
@@ -23,6 +23,7 @@ export async function getAnnouncements(className: ClassName) {
       announcements,
       eq(announcementClasses.announcementId, announcements.id),
     )
-    .where(eq(announcementClasses.className, className));
+    .where(eq(announcementClasses.className, className))
+    .orderBy(desc(announcements.createdAt));
   return result;
 }
