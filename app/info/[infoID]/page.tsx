@@ -1,5 +1,4 @@
-import { notFound } from "next/navigation";
-
+import { InvalidID } from "@/components/InvalidID";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
@@ -16,14 +15,14 @@ export default async function InfoPage({ params }: Props) {
   const { infoID } = await params;
   const id = Number(infoID);
   if (isNaN(id) || id <= 0) {
-    return notFound();
+    return <InvalidID href="/" />;
   }
   const info = await getInfo(id);
   if (info.length === 0) {
-    return notFound();
+    return <InvalidID href="/" />;
   }
   return (
-    <main>
+    <>
       <h2>{info[0].title}</h2>
       <p>{dateFormat(info[0].createdAt)}</p>
       <p>
@@ -33,6 +32,6 @@ export default async function InfoPage({ params }: Props) {
       {classFormat(await getAnnouncementClasses(id)).map((className, i) => (
         <span key={i}>{className}</span>
       ))}
-    </main>
+    </>
   );
 }

@@ -1,3 +1,26 @@
+:root {
+  --gray-0: #000;
+  --gray-1: #111;
+  --gray-2: #222;
+  --gray-3: #333;
+  --gray-4: #444;
+  --gray-5: #555;
+  --gray-6: #666;
+  --gray-7: #777;
+  --gray-8: #888;
+  --gray-9: #999;
+  --gray-a: #aaa;
+  --gray-b: #bbb;
+  --gray-c: #ccc;
+  --gray-d: #ddd;
+  --gray-e: #eee;
+  --gray-f: #fff;
+  --blue: #007bff;
+  --dark-blue: #0b69eb;
+  --green: #0f0;
+  --red: #f00;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -7,8 +30,25 @@
   color: inherit;
 }
 
+html,
 body {
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  color: var(--gray-2);
+  background-color: var(--gray-e);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  margin: 0px auto;
+  padding: 24px;
+  width: 100%;
+  max-width: 1400px;
 }
 
 h1 {
@@ -25,4 +65,8 @@ h3 {
 
 p {
   font-size: 16px;
+}
+
+a {
+  text-decoration: none;
 }

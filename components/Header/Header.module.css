@@ -1,0 +1,166 @@
+.header {
+  position: sticky;
+  top: 0px;
+  height: 64px;
+  background-color: var(--gray-f);
+  border-bottom: 1px solid var(--gray-e);
+  box-shadow: 0px 4px 20px #0001;
+}
+
+/* container */
+.container {
+  display: flex;
+  margin: 0px auto;
+  padding: 0 40px;
+  height: 64px;
+  width: 100%;
+  max-width: 1400px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* menu */
+.menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--gray-f);
+}
+
+.home {
+  display: flex;
+  height: 64px;
+  font-size: 24px;
+  line-height: 64px;
+  font-weight: 700;
+  color: var(--blue);
+  align-items: center;
+}
+
+.home * {
+  height: 64px;
+  width: auto;
+}
+
+.hamburger {
+  display: none;
+  height: 64px;
+  width: 64px;
+  align-items: center;
+  justify-content: center;
+}
+
+.bars,
+.bars::before,
+.bars::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 2px;
+  width: 27px;
+  background-color: var(--gray-2);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.bars::before {
+  transform: translateY(10px);
+}
+
+.bars::after {
+  transform: translateY(-10px);
+}
+
+.open .bars {
+  background-color: #0000;
+}
+
+.open .bars::before {
+  transform: rotate(-45deg);
+}
+
+.open .bars::after {
+  transform: rotate(45deg);
+}
+
+/* nav */
+.nav {
+  display: flex;
+  background-color: var(--gray-f);
+}
+
+.nav > * {
+  display: flex;
+  padding: 0px 10px;
+  height: 64px;
+  font-size: 16px;
+  color: var(--gray-3);
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.nav:has(:hover) > * {
+  color: var(--gray-9);
+}
+
+.nav:has(:hover) > *:hover {
+  color: var(--gray-2);
+}
+
+/* back */
+.back {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    flex-direction: column;
+    align-items: normal;
+    justify-content: normal;
+    padding: 0px;
+  }
+
+  .open .container {
+    height: 100vh;
+  }
+
+  .menu {
+    padding: 0px 16px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    flex-direction: column;
+    padding: 0px 20px 10px;
+    width: 100%;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+
+  .nav > * {
+    padding: 0px 10px;
+    height: 50px;
+    font-size: 16px;
+    color: var(--gray-3);
+    align-items: center;
+    transition: color 0.2s;
+    border-top: 1px solid var(--gray-c);
+  }
+
+  .open .nav {
+    display: flex;
+    transform: translateY(0px);
+    opacity: 1;
+    pointer-events: all;
+    transition: all 0.3s;
+  }
+
+  .open .back {
+    display: block;
+    flex: 1;
+  }
+}
