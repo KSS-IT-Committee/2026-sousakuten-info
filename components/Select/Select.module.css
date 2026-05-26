@@ -1,0 +1,17 @@
+.label {
+  display: block;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.labelText {
+  white-space: pre;
+}
+
+.select {
+  display: inline-block;
+  padding: 3px 5px;
+  background-color: var(--background);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-a);
+}

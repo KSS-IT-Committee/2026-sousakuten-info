@@ -44,8 +44,8 @@ export default function Home() {
   return (
     <>
       <h1>情報伝達ページ</h1>
-      <Select options={grades} onChange={setGrade} />
-      <Select options={classes} onChange={setClassName} />
+      <Select label="学年: " options={grades} onChange={setGrade} />
+      <Select label="クラス: " options={classes} onChange={setClassName} />
       <h2>お知らせ</h2>
       <List
         items={announcements}

@@ -28,6 +28,7 @@
   --unselected-foreground: var(--gray-9);
 
   --border: var(--gray-c);
+  --radius: 3px;
 }
 
 * {

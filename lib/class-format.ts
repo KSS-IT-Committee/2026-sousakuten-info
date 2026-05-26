@@ -4,7 +4,7 @@ export const classFormat = (classes: ClassName[]) => {
     return ["全クラス"];
   }
   const grades: string[] = [];
-  let remainClasses: ClassName[] = classes;
+  let remainClasses: ClassName[] = classes.sort();
   GRADES.forEach((grade) => {
     const className = CLASSES.map((c) => `${grade}${c}` as ClassName);
     if (className.every((c) => classes.includes(c))) {

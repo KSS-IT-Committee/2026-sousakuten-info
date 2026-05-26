@@ -28,17 +28,24 @@
   border-radius: 100%;
 }
 
-.title {
-  display: flex;
-  padding-left: 10px;
-}
-
 .date {
   display: flex;
   width: 100px;
   justify-content: center;
 }
 
+.title {
+  display: flex;
+  flex: 1;
+  padding-left: 10px;
+}
+
+.subtext {
+  font-size: 14px;
+  color: var(--gray-5);
+}
+
 .emptyMessage {
+  padding: 0px 10px;
   font-size: 16px;
 }

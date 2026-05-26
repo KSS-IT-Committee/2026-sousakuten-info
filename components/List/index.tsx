@@ -10,6 +10,7 @@ type ListProp = {
     id: number;
     date: Date;
     title: string;
+    subtext?: string;
   }[];
   emptyMessage: string;
   link?: string;
@@ -19,7 +20,7 @@ export function List({ items, emptyMessage, link }: ListProp) {
   return (
     <div className={styles.list}>
       {items.length !== 0 ? (
-        items.map(({ id, date, title }, i) => {
+        items.map(({ id, date, title, subtext }, i) => {
           if (link) {
             return (
               <Link
@@ -27,17 +28,13 @@ export function List({ items, emptyMessage, link }: ListProp) {
                 href={`${link}${id}`}
                 className={`${styles.link} ${styles.record}`}
               >
-                <span title={timeFormat(date)} className={styles.date}>
-                  {dateFormat(date)}
-                </span>
-                <span className={styles.title}>{title}</span>
+                {Record({ date, title, subtext })}
               </Link>
             );
           } else {
             return (
               <div key={i} className={styles.record}>
-                <span className={styles.date}>{dateFormat(date)}</span>
-                <span className={styles.title}>{title}</span>
+                {Record({ date, title, subtext })}
               </div>
             );
           }
@@ -46,5 +43,27 @@ export function List({ items, emptyMessage, link }: ListProp) {
         <div className={styles.emptyMessage}>{emptyMessage}</div>
       )}
     </div>
+  );
+}
+
+function Record({
+  date,
+  title,
+  subtext,
+}: {
+  date: Date;
+  title: string;
+  subtext?: string;
+}) {
+  return (
+    <>
+      <span title={timeFormat(date)} className={styles.date}>
+        {dateFormat(date)}
+      </span>
+      <span title={title} className={styles.title}>
+        {title}
+      </span>
+      {subtext && <span className={styles.subtext}>{subtext}</span>}
+    </>
   );
 }
