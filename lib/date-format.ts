@@ -1,7 +1,9 @@
-export const dateFormat = (date_str: Date, sep: string = "/") => {
+export const dateFormat = (date_str: Date) => {
   const date = new Date(date_str);
-  const yyyy = date.getFullYear();
-  const mm = ("00" + (date.getMonth() + 1)).slice(-2);
-  const dd = ("00" + date.getDate()).slice(-2);
-  return `${yyyy}${sep}${mm}${sep}${dd}`;
+  return new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
 };

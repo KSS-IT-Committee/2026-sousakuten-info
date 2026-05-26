@@ -18,7 +18,10 @@ export default async function InfoPage({ params }: Props) {
   if (isNaN(id) || id <= 0) {
     return notFound();
   }
-  const info = await getInfo(id);
+  const [info, classes] = await Promise.all([
+    getInfo(id),
+    getAnnouncementClasses(id),
+  ]);
   if (info === undefined) {
     return notFound();
   }
@@ -30,7 +33,7 @@ export default async function InfoPage({ params }: Props) {
         <MultiLine body={info.body} />
       </p>
       <h3>対象クラス</h3>
-      {classFormat(await getAnnouncementClasses(id)).map((className, i) => (
+      {classFormat(classes).map((className, i) => (
         <span key={i}>{className}</span>
       ))}
     </main>

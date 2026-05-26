@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     await addAnnouncements({ title, body, classes } as AddAnnouncementsProps);
     return Response.json({ success: true });
   } catch (error) {
-    console.error("Failed to get announcements:", error);
+    console.error("Failed to add announcements:", error);
     return Response.json(
       { error: "Failed to add announcement" },
       { status: 500 },

@@ -1,4 +1,5 @@
 import { desc, eq } from "drizzle-orm";
+import { connection } from "next/server";
 
 import { ClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
@@ -12,6 +13,7 @@ export type AnnouncementsReturn = {
 }[];
 
 export async function getAnnouncements(className: ClassName) {
+  await connection();
   const result: AnnouncementsReturn = await db
     .select({
       id: announcements.id,
