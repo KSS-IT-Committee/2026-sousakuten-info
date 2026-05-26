@@ -1,4 +1,5 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
+import { connection } from "next/server";
 
 import { ClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
@@ -12,6 +13,7 @@ export type AnnouncementsReturn = {
 }[];
 
 export async function getAnnouncements(className: ClassName) {
+  await connection();
   const result: AnnouncementsReturn = await db
     .select({
       id: announcements.id,
@@ -23,6 +25,7 @@ export async function getAnnouncements(className: ClassName) {
       announcements,
       eq(announcementClasses.announcementId, announcements.id),
     )
-    .where(eq(announcementClasses.className, className));
+    .where(eq(announcementClasses.className, className))
+    .orderBy(desc(announcements.createdAt));
   return result;
 }

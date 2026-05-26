@@ -23,12 +23,18 @@ export default function Home() {
     fetch(`/api/announcements?className=${grade}${className}`, {
       signal: controller.signal,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(`status ${res.status}`);
+        }
+      })
       .then(setAnnouncements)
       .catch((error) => {
         if (error.name !== "AbortError") {
           console.error("Failed to fetch announcements:", error);
-          setAnnouncements([]);
+          alert("お知らせの取得に失敗しました");
         }
       });
 

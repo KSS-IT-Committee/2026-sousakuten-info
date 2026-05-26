@@ -37,17 +37,18 @@ export async function POST(req: NextRequest) {
   } catch {
     return Response.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { title, body, classes } = json as PostBody;
+  const { title, body, classes: classes_list } = json as PostBody;
   if (
     typeof title !== "string" ||
     title.length === 0 ||
     typeof body !== "string" ||
     body.length === 0 ||
-    !Array.isArray(classes) ||
-    classes.length === 0
+    !Array.isArray(classes_list) ||
+    classes_list.length === 0
   ) {
     return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
+  const classes = Array.from(new Set(classes_list));
   if (classes.some((v) => !isClassName(v))) {
     return Response.json({ error: "Invalid class name" }, { status: 400 });
   }
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
     await addAnnouncements({ title, body, classes } as AddAnnouncementsProps);
     return Response.json({ success: true });
   } catch (error) {
-    console.error("Failed to get announcements:", error);
+    console.error("Failed to add announcements:", error);
     return Response.json(
       { error: "Failed to add announcement" },
       { status: 500 },

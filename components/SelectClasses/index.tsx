@@ -1,57 +1,52 @@
 "use client";
-import { useState } from "react";
 
-import { Class, CLASSES, ClassName, Grade, GRADES } from "@/lib/classes";
-
-const ALLCLASSES = GRADES.flatMap((g) =>
-  CLASSES.map((c) => `${g}${c}` as ClassName),
-);
+import {
+  Class,
+  CLASSES,
+  ClassName,
+  CLASSNAMES,
+  Grade,
+  GRADES,
+} from "@/lib/classes";
 
 type SelectClassesProps = {
   value?: ClassName[];
-  onChange: (selected: ClassName[]) => void;
+  onChange: (value: ClassName[]) => void;
 };
 
 export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
-  const [selected, setSelected] = useState<ClassName[]>(value);
-
   const toggleAll = (checked: boolean) => {
     if (checked) {
-      update(ALLCLASSES);
+      onChange(Array.from(CLASSNAMES));
     } else {
-      update([]);
+      onChange([]);
     }
   };
 
   const toggleGrade = (grade: Grade, checked: boolean) => {
     const targets = CLASSES.map((c) => `${grade}${c}` as ClassName);
     if (checked) {
-      update([...new Set([...selected, ...targets])]);
+      onChange(Array.from(new Set([...value, ...targets])));
     } else {
-      update(selected.filter((v) => !targets.includes(v)));
+      onChange(value.filter((v) => !targets.includes(v)));
     }
   };
 
-  const toggleClassGroup = (className: Class, checked: boolean) => {
-    const targets = GRADES.map((g) => `${g}${className}` as ClassName);
+  const toggleClassGroup = (classes: Class, checked: boolean) => {
+    const targets = GRADES.map((g) => `${g}${classes}` as ClassName);
     if (checked) {
-      update([...new Set([...selected, ...targets])]);
+      onChange(Array.from(new Set([...value, ...targets])));
     } else {
-      update(selected.filter((v) => !targets.includes(v)));
+      onChange(value.filter((v) => !targets.includes(v)));
     }
   };
 
   const toggleClass = (className: ClassName, checked: boolean) => {
     if (checked) {
-      update([...new Set([...selected, className])]);
+      onChange(Array.from(new Set([...value, className])));
     } else {
-      update(selected.filter((v) => v !== className));
+      onChange(value.filter((v) => v !== className));
     }
-  };
-
-  const update = (next: ClassName[]) => {
-    setSelected(next);
-    onChange(next);
   };
 
   return (
@@ -63,14 +58,16 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
               全て
               <input
                 type="checkbox"
-                checked={selected.length === ALLCLASSES.length}
+                checked={CLASSNAMES.every((className) =>
+                  value.includes(className),
+                )}
                 onChange={(e) => toggleAll(e.target.checked)}
               />
             </label>
           </th>
           {CLASSES.map((c) => {
             const targets = GRADES.map((g) => `${g}${c}` as ClassName);
-            const checked = targets.every((v) => selected.includes(v));
+            const checked = targets.every((v) => value.includes(v));
             return (
               <th key={c}>
                 <label>
@@ -89,7 +86,7 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
       <tbody>
         {GRADES.map((g) => {
           const gradeTargets = CLASSES.map((c) => `${g}${c}` as ClassName);
-          const gradeChecked = gradeTargets.every((v) => selected.includes(v));
+          const gradeChecked = gradeTargets.every((v) => value.includes(v));
           return (
             <tr key={g}>
               <th>
@@ -103,15 +100,15 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
                 </label>
               </th>
               {CLASSES.map((c) => {
-                const value = `${g}${c}` as ClassName;
+                const v = `${g}${c}` as ClassName;
                 return (
-                  <td key={value}>
+                  <td key={v}>
                     <label>
-                      {value}
+                      {v}
                       <input
                         type="checkbox"
-                        checked={selected.includes(value)}
-                        onChange={(e) => toggleClass(value, e.target.checked)}
+                        checked={value.includes(v)}
+                        onChange={(e) => toggleClass(v, e.target.checked)}
                       />
                     </label>
                   </td>

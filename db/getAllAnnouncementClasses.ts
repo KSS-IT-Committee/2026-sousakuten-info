@@ -1,5 +1,5 @@
 import { desc, eq } from "drizzle-orm";
-import { unstable_noStore } from "next/cache";
+import { connection } from "next/server";
 
 import { ClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
@@ -12,7 +12,7 @@ export type AnnouncementsClassesReturn = {
 };
 
 export async function getAllAnnouncementClasses() {
-  unstable_noStore();
+  await connection();
   const result: AnnouncementsClassesReturn[] = await db
     .select({
       id: announcements.id,

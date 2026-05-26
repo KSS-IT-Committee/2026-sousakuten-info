@@ -6,8 +6,10 @@ import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
 
 export default async function Info() {
-  const announcements = await getAllAnnouncements();
-  const classes = await getAllAnnouncementClasses();
+  const [announcements, classes] = await Promise.all([
+    getAllAnnouncements(),
+    getAllAnnouncementClasses(),
+  ]);
   return (
     <>
       <h2>お知らせ一覧</h2>
