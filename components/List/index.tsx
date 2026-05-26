@@ -1,6 +1,9 @@
 import Link from "next/link";
 
 import { dateFormat } from "@/lib/date-format";
+import { timeFormat } from "@/lib/time-format";
+
+import styles from "./List.module.css";
 
 type ListProp = {
   items: {
@@ -14,31 +17,33 @@ type ListProp = {
 
 export function List({ items, emptyMessage, link }: ListProp) {
   return (
-    <div>
+    <div className={styles.list}>
       {items.length !== 0 ? (
         items.map(({ id, date, title }, i) => {
           if (link) {
             return (
-              <div key={i}>
-                <Link href={`${link}${id}`}>
-                  <span>{dateFormat(date)}</span>
-                  {title}
-                </Link>
-              </div>
+              <Link
+                key={i}
+                href={`${link}${id}`}
+                className={`${styles.link} ${styles.record}`}
+              >
+                <span title={timeFormat(date)} className={styles.date}>
+                  {dateFormat(date)}
+                </span>
+                <span className={styles.title}>{title}</span>
+              </Link>
             );
           } else {
             return (
-              <div key={i}>
-                <span>
-                  <span>{dateFormat(date)}</span>
-                  {title}
-                </span>
+              <div key={i} className={styles.record}>
+                <span className={styles.date}>{dateFormat(date)}</span>
+                <span className={styles.title}>{title}</span>
               </div>
             );
           }
         })
       ) : (
-        <div>{emptyMessage}</div>
+        <div className={styles.emptyMessage}>{emptyMessage}</div>
       )}
     </div>
   );

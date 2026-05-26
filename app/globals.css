@@ -19,6 +19,15 @@
   --dark-blue: #0b69eb;
   --green: #0f0;
   --red: #f00;
+
+  --background: var(--gray-f);
+  --foreground: var(--gray-2);
+
+  --selectable-foreground: var(--gray-3);
+  --selected-foreground: var(--gray-2);
+  --unselected-foreground: var(--gray-9);
+
+  --border: var(--gray-c);
 }
 
 * {
@@ -34,8 +43,8 @@ html,
 body {
   height: 100%;
   width: 100%;
-  color: var(--gray-2);
-  background-color: var(--gray-e);
+  color: var(--foreground);
+  background-color: var(--background);
 }
 
 body {

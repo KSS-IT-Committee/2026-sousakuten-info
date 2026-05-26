@@ -2,7 +2,7 @@
   position: sticky;
   top: 0px;
   height: 64px;
-  background-color: var(--gray-f);
+  background-color: var(--background);
   border-bottom: 1px solid var(--gray-e);
   box-shadow: 0px 4px 20px #0001;
 }
@@ -23,7 +23,7 @@
 .menu {
   display: flex;
   justify-content: space-between;
-  background-color: var(--gray-f);
+  background-color: var(--background);
 }
 
 .home {
@@ -57,7 +57,7 @@
   display: block;
   height: 2px;
   width: 27px;
-  background-color: var(--gray-2);
+  background-color: var(--foreground);
   border-radius: 2px;
   transition: all 0.3s;
 }
@@ -85,7 +85,7 @@
 /* nav */
 .nav {
   display: flex;
-  background-color: var(--gray-f);
+  background-color: var(--background);
 }
 
 .nav > * {
@@ -93,17 +93,17 @@
   padding: 0px 10px;
   height: 64px;
   font-size: 16px;
-  color: var(--gray-3);
+  color: var(--selectable-foreground);
   align-items: center;
   transition: color 0.2s;
 }
 
 .nav:has(:hover) > * {
-  color: var(--gray-9);
+  color: var(--unselected-foreground);
 }
 
 .nav:has(:hover) > *:hover {
-  color: var(--gray-2);
+  color: var(--selected-foreground);
 }
 
 /* back */
@@ -145,10 +145,10 @@
     padding: 0px 10px;
     height: 50px;
     font-size: 16px;
-    color: var(--gray-3);
+    color: var(--selectable-foreground);
     align-items: center;
     transition: color 0.2s;
-    border-top: 1px solid var(--gray-c);
+    border-top: 1px solid var(--border);
   }
 
   .open .nav {

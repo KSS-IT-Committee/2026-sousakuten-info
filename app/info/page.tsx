@@ -13,21 +13,25 @@ export default async function Info() {
   return (
     <>
       <h2>お知らせ一覧</h2>
-      {announcements.map(({ id, title, date }) => (
-        <div key={id}>
-          <Link href={`/info/${id}`}>
-            {dateFormat(date)}
-            {title}
-            {classFormat(
-              classes
-                .filter(({ id: classId }) => classId === id)
-                .map(({ className }) => className),
-            ).map((className, ci) => (
-              <span key={ci}>{className}</span>
-            ))}
-          </Link>
-        </div>
-      ))}
+      {announcements.length === 0 ? (
+        <p>お知らせはありません</p>
+      ) : (
+        announcements.map(({ id, title, date }) => (
+          <div key={id}>
+            <Link href={`/info/${id}`}>
+              {dateFormat(date)}
+              {title}
+              {classFormat(
+                classes
+                  .filter(({ id: classId }) => classId === id)
+                  .map(({ className }) => className),
+              ).map((className, ci) => (
+                <span key={ci}>{className}</span>
+              ))}
+            </Link>
+          </div>
+        ))
+      )}
     </>
   );
 }

@@ -6,9 +6,7 @@ export default function NotFound() {
       <h1>404</h1>
       <h2>ページが見つかりません</h2>
       <p>お探しのページは見つかりませんでした。</p>
-      <p>
-        <Link href="/">ホームに戻る</Link>
-      </p>
+      <Link href="/">ホームに戻る</Link>
     </>
   );
 }

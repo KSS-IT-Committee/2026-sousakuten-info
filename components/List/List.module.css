@@ -1,0 +1,44 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.record {
+  position: relative;
+  display: flex;
+  height: 40px;
+  color: var(--selectable-foreground);
+  align-items: center;
+}
+
+.record:hover {
+  color: var(--selected-foreground);
+}
+
+.record::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background-color: var(--border);
+  border-radius: 100%;
+}
+
+.title {
+  display: flex;
+  padding-left: 10px;
+}
+
+.date {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+}
+
+.emptyMessage {
+  font-size: 16px;
+}
