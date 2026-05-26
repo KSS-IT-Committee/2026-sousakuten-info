@@ -38,17 +38,17 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "Invalid request" }, { status: 400 });
   }
   const { title, body, classes: classes_list } = json as PostBody;
-  const classes = Array.from(new Set(classes_list));
   if (
     typeof title !== "string" ||
     title.length === 0 ||
     typeof body !== "string" ||
     body.length === 0 ||
-    !Array.isArray(classes) ||
-    classes.length === 0
+    !Array.isArray(classes_list) ||
+    classes_list.length === 0
   ) {
     return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
+  const classes = Array.from(new Set(classes_list));
   if (classes.some((v) => !isClassName(v))) {
     return Response.json({ error: "Invalid class name" }, { status: 400 });
   }
