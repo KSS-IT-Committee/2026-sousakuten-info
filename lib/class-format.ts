@@ -5,11 +5,18 @@ export const classFormat = (classes: ClassName[]) => {
   }
   const grades: string[] = [];
   let remainClasses: ClassName[] = classes.sort();
-  GRADES.forEach((grade) => {
-    const className = CLASSES.map((c) => `${grade}${c}` as ClassName);
+  GRADES.forEach((g) => {
+    const className = CLASSES.map((c) => `${g}${c}` as ClassName);
     if (className.every((c) => classes.includes(c))) {
       remainClasses = remainClasses.filter((c) => !className.includes(c));
-      grades.push(`${grade}年`);
+      grades.push(`${g}年`);
+    }
+  });
+  CLASSES.forEach((c) => {
+    const className = GRADES.map((g) => `${g}${c}` as ClassName);
+    if (className.every((c) => classes.includes(c))) {
+      remainClasses = remainClasses.filter((c) => !className.includes(c));
+      grades.push(`${c}組`);
     }
   });
   return [...grades, ...remainClasses];

@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
 import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
-import Link from "next/link";
+
 import styles from "./info-page.module.css";
 
 type Props = {

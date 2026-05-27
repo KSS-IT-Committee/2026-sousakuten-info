@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 
 import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
+import { classFormat } from "@/lib/class-format";
 import { ClassName } from "@/lib/classes";
 
 import styles from "./add-info.module.css";
@@ -52,6 +53,11 @@ export default function AddInfo() {
         ></textarea>
       </label>
       <h2 className={styles.subtitle}>対象クラス</h2>
+      <p>
+        {classes.length === 0
+          ? "クラスを選択してください。"
+          : `選択中 : ${classFormat(classes).join(", ")}`}
+      </p>
       <SelectClasses value={classes} onChange={setClasses} />
       <Button onClick={addAnnouncement}>追加</Button>
     </>

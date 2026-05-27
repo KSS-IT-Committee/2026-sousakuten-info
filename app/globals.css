@@ -29,6 +29,11 @@
 
   --border: var(--gray-c);
   --radius: 3px;
+
+  --class-blue: #58f;
+  --class-red: #f66;
+  --class-green: #5c8;
+  --class-white: #ddd;
 }
 
 * {
