@@ -3,17 +3,17 @@ import { db } from "@/lib/db";
 
 import { announcementClasses, announcements } from "./schema";
 
-export type AddAnnouncementsProps = {
+export type AddAnnouncementProps = {
   title: string;
   body: string;
   classes: ClassName[];
 };
 
-export async function addAnnouncements({
+export async function addAnnouncement({
   title,
   body,
   classes,
-}: AddAnnouncementsProps) {
+}: AddAnnouncementProps) {
   await db.transaction(async (tx) => {
     const [announcement] = await tx
       .insert(announcements)
