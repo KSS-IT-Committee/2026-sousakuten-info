@@ -41,9 +41,7 @@ export default function AddInfo() {
       </label>
       <h3>対象クラス</h3>
       <SelectClasses value={classes} onChange={setClasses} />
-      <button type="submit" onClick={addAnnouncement}>
-        追加
-      </button>
+      <button onClick={addAnnouncement}>追加</button>
     </form>
   );
 }
