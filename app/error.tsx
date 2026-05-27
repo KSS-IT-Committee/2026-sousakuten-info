@@ -9,7 +9,9 @@ export default function Error({
     <div>
       <h1>エラー</h1>
       <p>エラーが発生しました。</p>
-      <button onClick={unstable_retry}>再試行</button>
+      <button type="button" onClick={unstable_retry}>
+        再試行
+      </button>
     </div>
   );
 }

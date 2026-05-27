@@ -29,7 +29,7 @@ export default function AddInfo() {
   };
 
   return (
-    <>
+    <form>
       <h2>お知らせを追加</h2>
       <label>
         タイトル
@@ -41,7 +41,9 @@ export default function AddInfo() {
       </label>
       <h3>対象クラス</h3>
       <SelectClasses value={classes} onChange={setClasses} />
-      <button onClick={addAnnouncement}>追加</button>
-    </>
+      <button type="submit" onClick={addAnnouncement}>
+        追加
+      </button>
+    </form>
   );
 }
