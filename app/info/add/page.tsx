@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
 import { ClassName } from "@/lib/classes";
 
@@ -41,7 +42,7 @@ export default function AddInfo() {
       </label>
       <h3>対象クラス</h3>
       <SelectClasses value={classes} onChange={setClasses} />
-      <button onClick={addAnnouncement}>追加</button>
+      <Button onClick={addAnnouncement}>追加</Button>
     </>
   );
 }
