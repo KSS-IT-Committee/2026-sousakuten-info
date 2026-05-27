@@ -6,6 +6,8 @@ import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
 import { ClassName } from "@/lib/classes";
 
+import styles from "./add-info.module.css";
+
 export default function AddInfo() {
   const [classes, setClasses] = useState<ClassName[]>([]);
   const title = useRef<HTMLInputElement>(null);
@@ -31,16 +33,25 @@ export default function AddInfo() {
 
   return (
     <>
-      <h2>お知らせを追加</h2>
-      <label>
-        タイトル
-        <input ref={title} type="text" placeholder="タイトルを入力" />
+      <h1 className={styles.title}>お知らせを追加</h1>
+      <label className={styles.label}>
+        <span className={styles.labelText}>タイトル</span>
+        <input
+          className={styles.input}
+          ref={title}
+          type="text"
+          placeholder="タイトルを入力"
+        />
       </label>
-      <label>
-        内容
-        <textarea ref={body} placeholder="お知らせ内容を入力"></textarea>
+      <label className={styles.label}>
+        <span className={styles.labelText}>内容</span>
+        <textarea
+          className={styles.textarea}
+          ref={body}
+          placeholder="お知らせ内容を入力"
+        ></textarea>
       </label>
-      <h3>対象クラス</h3>
+      <h2 className={styles.subtitle}>対象クラス</h2>
       <SelectClasses value={classes} onChange={setClasses} />
       <Button onClick={addAnnouncement}>追加</Button>
     </>

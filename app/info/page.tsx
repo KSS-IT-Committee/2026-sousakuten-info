@@ -18,7 +18,7 @@ export default async function Info() {
   });
   return (
     <>
-      <h2>お知らせ一覧</h2>
+      <h1>お知らせ一覧</h1>
       <List items={items} emptyMessage="お知らせはありません" link="/info/" />
     </>
   );

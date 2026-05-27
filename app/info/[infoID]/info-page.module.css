@@ -1,0 +1,33 @@
+.title {
+  padding: 5px 0px;
+}
+
+.subtitle {
+  padding: 5px 0px;
+}
+
+.date {
+  color: var(--gray-7);
+}
+
+.content {
+  padding: 15px 0px;
+  min-height: 100px;
+}
+
+.classes {
+  padding: 10px 0px;
+  color: var(--gray-5);
+}
+
+.hr {
+  margin: 7px 5px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.link {
+  display: block;
+  padding: 10px 0px;
+  color: var(--blue);
+}

@@ -11,7 +11,7 @@ export default function NotFound() {
         お探しのページは移動または削除された可能性があります
       </p>
       <Link href="/" className={styles.link}>
-        ホームに戻る
+        トップに戻る
       </Link>
     </>
   );
