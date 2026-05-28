@@ -15,20 +15,23 @@ export default function AddInfo() {
   const body = useRef<HTMLTextAreaElement>(null);
 
   const addAnnouncement = async () => {
-    const res = await fetch("/api/announcements", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title?.current?.value,
-        body: body?.current?.value,
-        classes: classes,
-      }),
-    });
-    if (!res.ok) {
+    try {
+      const res = await fetch("/api/announcements", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title?.current?.value,
+          body: body?.current?.value,
+          classes: classes,
+        }),
+      });
+      if (!res.ok) {
+        alert("お知らせの追加に失敗しました");
+      }
+    } catch {
       alert("お知らせの追加に失敗しました");
-      return;
     }
   };
 
@@ -53,11 +56,8 @@ export default function AddInfo() {
         ></textarea>
       </label>
       <h2 className={styles.subtitle}>対象クラス</h2>
-      <p>
-        {classes.length === 0
-          ? "クラスを選択してください。"
-          : `選択中 : ${classFormat(classes).join(", ")}`}
-      </p>
+      <p>クラスを選択してください。</p>
+      <p>{`選択中 : ${classFormat(classes).join(", ")}`}</p>
       <SelectClasses value={classes} onChange={setClasses} />
       <Button onClick={addAnnouncement}>追加</Button>
     </>

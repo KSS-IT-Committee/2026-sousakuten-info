@@ -31,13 +31,13 @@ export function List({ items, emptyMessage, link }: ListProp) {
                 href={`${link}${param}`}
                 className={`${styles.link} ${styles.record}`}
               >
-                {Record({ date, title, subtext })}
+                <Record date={date} title={title} subtext={subtext} />
               </Link>
             );
           } else {
             return (
               <div key={id} className={styles.record}>
-                {Record({ date, title, subtext })}
+                <Record date={date} title={title} subtext={subtext} />
               </div>
             );
           }

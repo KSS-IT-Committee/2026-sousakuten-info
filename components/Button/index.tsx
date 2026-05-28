@@ -12,6 +12,7 @@ type ButtonProp = {
 export function Button({ children, onClick, className, color }: ButtonProp) {
   return (
     <button
+      type="button"
       className={`${styles.button} ${className}`}
       onClick={onClick}
       style={{ backgroundColor: color }}

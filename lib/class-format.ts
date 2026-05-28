@@ -1,10 +1,13 @@
 import { CLASSES, ClassName, CLASSNAMES, GRADES } from "@/lib/classes";
 export const classFormat = (classes: ClassName[]) => {
+  if (classes.length === 0) {
+    return ["なし"];
+  }
   if (CLASSNAMES.every((className) => classes.includes(className))) {
     return ["全クラス"];
   }
   const grades: string[] = [];
-  let remainClasses: ClassName[] = classes.sort();
+  let remainClasses: ClassName[] = [...classes].sort();
   GRADES.forEach((g) => {
     const className = CLASSES.map((c) => `${g}${c}` as ClassName);
     if (className.every((c) => classes.includes(c))) {
