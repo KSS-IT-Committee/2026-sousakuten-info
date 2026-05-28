@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-import { addAnnouncements, AddAnnouncementsProps } from "@/db/addAnnouncements";
+import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
 import { getAnnouncements } from "@/db/getAnnouncements";
 import { ClassName, isClassName } from "@/lib/classes";
 
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error("Failed to get announcements:", error);
     return Response.json(
-      { error: "Failed to get announcement" },
+      { error: "Failed to get announcements" },
       { status: 500 },
     );
   }
@@ -37,6 +37,9 @@ export async function POST(req: NextRequest) {
   } catch {
     return Response.json({ error: "Invalid request" }, { status: 400 });
   }
+  if (typeof json !== "object" || Array.isArray(json) || json === null) {
+    return Response.json({ error: "Invalid request" }, { status: 400 });
+  }
   const { title, body, classes: classes_list } = json as PostBody;
   if (
     typeof title !== "string" ||
@@ -53,10 +56,10 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "Invalid class name" }, { status: 400 });
   }
   try {
-    await addAnnouncements({ title, body, classes } as AddAnnouncementsProps);
+    await addAnnouncement({ title, body, classes } as AddAnnouncementProps);
     return Response.json({ success: true });
   } catch (error) {
-    console.error("Failed to add announcements:", error);
+    console.error("Failed to add announcement:", error);
     return Response.json(
       { error: "Failed to add announcement" },
       { status: 500 },

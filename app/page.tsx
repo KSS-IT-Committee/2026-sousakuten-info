@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { List } from "@/components/List";
+import { List, ListItems } from "@/components/List";
 import { Select } from "@/components/Select";
 import { AnnouncementsReturn } from "@/db/getAnnouncements";
 
 export default function Home() {
   const [grade, setGrade] = useState("1");
   const [className, setClassName] = useState("A");
-  const [announcements, setAnnouncements] = useState<AnnouncementsReturn>([]);
+  const [announcements, setAnnouncements] = useState<ListItems>([]);
   const grades = ["1", "2", "3", "4", "5", "6"].map((g) => ({
     value: g,
     label: `${g}年`,
@@ -30,7 +30,16 @@ export default function Home() {
           throw new Error(`status ${res.status}`);
         }
       })
-      .then(setAnnouncements)
+      .then((json: AnnouncementsReturn) => {
+        setAnnouncements(
+          json.map(({ id, date, title }, i) => ({
+            id: i,
+            param: id,
+            date,
+            title,
+          })),
+        );
+      })
       .catch((error) => {
         if (error.name !== "AbortError") {
           console.error("Failed to fetch announcements:", error);

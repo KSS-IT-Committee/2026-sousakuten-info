@@ -13,7 +13,7 @@ export default function Error({
     <>
       <h1 className={styles.title}>エラー</h1>
       <p className={styles.text}>エラーが発生しました。</p>
-      <Button onClick={unstable_retry} className={styles.button}>
+      <Button onClick={() => unstable_retry()} className={styles.button}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

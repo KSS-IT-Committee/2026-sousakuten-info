@@ -5,13 +5,16 @@ import { timeFormat } from "@/lib/time-format";
 
 import styles from "./List.module.css";
 
+export type ListItems = {
+  id: number;
+  date: Date;
+  title: string;
+  subtext?: string;
+  param?: string | number;
+}[];
+
 type ListProp = {
-  items: {
-    id: number;
-    date: Date;
-    title: string;
-    subtext?: string;
-  }[];
+  items: ListItems;
   emptyMessage: string;
   link?: string;
 };
@@ -20,12 +23,12 @@ export function List({ items, emptyMessage, link }: ListProp) {
   return (
     <div className={styles.list}>
       {items.length !== 0 ? (
-        items.map(({ id, date, title, subtext }, i) => {
+        items.map(({ id, date, title, subtext, param }) => {
           if (link) {
             return (
               <Link
-                key={i}
-                href={`${link}${id}`}
+                key={id}
+                href={`${link}${param}`}
                 className={`${styles.link} ${styles.record}`}
               >
                 {Record({ date, title, subtext })}
@@ -33,7 +36,7 @@ export function List({ items, emptyMessage, link }: ListProp) {
             );
           } else {
             return (
-              <div key={i} className={styles.record}>
+              <div key={id} className={styles.record}>
                 {Record({ date, title, subtext })}
               </div>
             );
