@@ -1,0 +1,16 @@
+import { CLASSES, ClassName, CLASSNAMES, GRADES } from "@/lib/classes";
+export const classFormat = (classes: ClassName[]) => {
+  if (CLASSNAMES.every((className) => classes.includes(className))) {
+    return ["全クラス"];
+  }
+  const grades: string[] = [];
+  let remainClasses: ClassName[] = classes;
+  GRADES.forEach((grade) => {
+    const className = CLASSES.map((c) => `${grade}${c}` as ClassName);
+    if (className.every((c) => classes.includes(c))) {
+      remainClasses = remainClasses.filter((c) => !className.includes(c));
+      grades.push(`${grade}年`);
+    }
+  });
+  return [...grades, ...remainClasses];
+};
