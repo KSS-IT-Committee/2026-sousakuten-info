@@ -3,6 +3,7 @@
 import { Button } from "@/components/Button";
 
 import styles from "./error.module.css";
+import shared from "./shared.module.css";
 
 export default function Error({
   unstable_retry,
@@ -11,7 +12,7 @@ export default function Error({
 }) {
   return (
     <>
-      <h1 className={styles.title}>エラー</h1>
+      <h1 className={shared.title}>エラー</h1>
       <p className={styles.text}>エラーが発生しました。</p>
       <Button onClick={() => unstable_retry()} className={styles.button}>
         <svg
