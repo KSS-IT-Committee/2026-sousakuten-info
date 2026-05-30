@@ -43,7 +43,9 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className={styles.back} onClick={closeOpen}></div>
+        <button className={styles.back} onClick={closeOpen}>
+          戻る
+        </button>
       </div>
     </header>
   );

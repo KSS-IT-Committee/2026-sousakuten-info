@@ -86,7 +86,7 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
                     style={{
                       backgroundColor: `var(--class-${classColor[c]})`,
                     }}
-                  ></div>
+                  />
                   {c}組
                   <input
                     className={styles.checkbox}

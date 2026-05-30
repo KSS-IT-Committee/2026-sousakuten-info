@@ -60,12 +60,7 @@ export default function AddInfo() {
   };
 
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await addAnnouncement();
-      }}
-    >
+    <form action={addAnnouncement} className={styles.form}>
       <h1 className={styles.title}>お知らせを追加</h1>
       <label className={styles.label}>
         <span className={styles.labelText}>タイトル</span>
