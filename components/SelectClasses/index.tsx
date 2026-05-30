@@ -11,6 +11,13 @@ import {
 
 import styles from "./SelectClasses.module.css";
 
+const CLASS_COLOR: Record<Class, string> = {
+  A: "blue",
+  B: "red",
+  C: "green",
+  D: "white",
+};
+
 type SelectClassesProps = {
   value?: ClassName[];
   onChange: (value: ClassName[]) => void;
@@ -51,13 +58,6 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
     }
   };
 
-  const classColor = {
-    A: "blue",
-    B: "red",
-    C: "green",
-    D: "white",
-  };
-
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
@@ -84,7 +84,7 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
                   <div
                     className={styles.classColor}
                     style={{
-                      backgroundColor: `var(--class-${classColor[c]})`,
+                      backgroundColor: `var(--class-${CLASS_COLOR[c]})`,
                     }}
                   ></div>
                   {c}組

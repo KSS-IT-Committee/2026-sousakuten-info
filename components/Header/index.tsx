@@ -6,6 +6,12 @@ import { useState } from "react";
 
 import styles from "./Header.module.css";
 
+const items = [
+  { text: "クラスページ", url: "/" },
+  { text: "お知らせを管理", url: "/info" },
+  { text: "お知らせを追加", url: "/info/add" },
+];
+
 export function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleOpen = () => {
@@ -14,11 +20,6 @@ export function Header() {
   const closeOpen = () => {
     setIsOpen(false);
   };
-  const items = [
-    { text: "クラスページ", url: "/" },
-    { text: "お知らせを管理", url: "/info" },
-    { text: "お知らせを追加", url: "/info/add" },
-  ];
   return (
     <header className={`${styles.header} ${isOpen ? styles.open : ""}`}>
       <div className={styles.container}>
@@ -32,18 +33,31 @@ export function Header() {
               width={930}
             />
           </a>
-          <div className={styles.hamburger} onClick={toggleOpen}>
-            <div className={styles.bars}></div>
-          </div>
+          <button
+            type="button"
+            className={styles.hamburger}
+            onClick={toggleOpen}
+            aria-expanded={isOpen}
+            aria-controls="header-nav"
+            aria-label="メニュー"
+          >
+            <span className={styles.bars}></span>
+          </button>
         </div>
-        <nav className={styles.nav}>
+        <nav id="header-nav" className={styles.nav}>
           {items.map(({ text, url }, i) => (
             <Link href={url} key={i} onClick={closeOpen}>
               {text}
             </Link>
           ))}
         </nav>
-        <div className={styles.back} onClick={closeOpen}></div>
+        <button
+          type="button"
+          className={styles.back}
+          onClick={closeOpen}
+          aria-label="メニューを閉じる"
+          tabIndex={isOpen ? 0 : -1}
+        ></button>
       </div>
     </header>
   );
