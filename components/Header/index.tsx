@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import styles from "./Header.module.css";
@@ -14,8 +13,6 @@ const items = [
 ];
 
 export function Header() {
-  const router = useRouter();
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -27,28 +24,6 @@ export function Header() {
     <header className={`${styles.header} ${isOpen ? styles.open : ""}`}>
       <div className={styles.container}>
         <div className={styles.menu}>
-          {pathname !== "/" && (
-            <button
-              type="button"
-              className={styles.prev}
-              onClick={() => router.back()}
-              aria-label="前のページに戻る"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-          )}
           <a href="sosakuten-top-page" className={styles.home}>
             {/* 創作展 */}
             <Image

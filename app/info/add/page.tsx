@@ -3,11 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
+import { BackLink } from "@/components/BackLink";
 import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
 import { classFormat } from "@/lib/class-format";
 import { ClassName } from "@/lib/classes";
 
+import shared from "../../shared.module.css";
 import styles from "./add-info.module.css";
 
 export default function AddInfo() {
@@ -66,7 +68,10 @@ export default function AddInfo() {
         await addAnnouncement();
       }}
     >
-      <h1 className={styles.title}>お知らせを追加</h1>
+      <div className={shared.titleRow}>
+        <BackLink href="/info" />
+        <h1 className={styles.title}>お知らせを追加</h1>
+      </div>
       <label className={styles.label}>
         <span className={styles.labelText}>タイトル</span>
         <div className={styles.inputWrapper}>

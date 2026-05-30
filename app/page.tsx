@@ -77,6 +77,7 @@ export default function Home() {
         items={loading ? [] : announcements}
         emptyMessage={loading ? "読み込み中・・・" : "お知らせはありません"}
         link="/info/"
+        query="?from=/"
       />
       <h2>減点状況</h2>
       <List items={[]} emptyMessage="減点はありません" />

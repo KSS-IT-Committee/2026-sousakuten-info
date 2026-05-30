@@ -19,7 +19,12 @@ export default async function Info() {
   return (
     <>
       <h1>お知らせ一覧</h1>
-      <List items={items} emptyMessage="お知らせはありません" link="/info/" />
+      <List
+        items={items}
+        emptyMessage="お知らせはありません"
+        link="/info/"
+        query="?from=/info"
+      />
     </>
   );
 }

@@ -1,3 +1,9 @@
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .title {
   padding: 5px 0px;
 }

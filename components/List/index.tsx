@@ -17,9 +17,10 @@ type ListProp = {
   items: ListItems;
   emptyMessage: string;
   link?: string;
+  query?: string;
 };
 
-export function List({ items, emptyMessage, link }: ListProp) {
+export function List({ items, emptyMessage, link, query }: ListProp) {
   return (
     <div className={styles.list}>
       {items.length !== 0 ? (
@@ -28,7 +29,7 @@ export function List({ items, emptyMessage, link }: ListProp) {
             return (
               <Link
                 key={id}
-                href={`${link}${param ?? ""}`}
+                href={`${link}${param ?? ""}${query ?? ""}`}
                 className={`${styles.link} ${styles.record}`}
               >
                 <Record date={date} title={title} subtext={subtext} />
