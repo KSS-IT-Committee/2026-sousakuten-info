@@ -9,6 +9,7 @@ export default function Home() {
   const [grade, setGrade] = useState("1");
   const [className, setClassName] = useState("A");
   const [announcements, setAnnouncements] = useState<ListItems>([]);
+  const [loading, setLoading] = useState(true);
   const grades = ["1", "2", "3", "4", "5", "6"].map((g) => ({
     value: g,
     label: `${g}年`,
@@ -39,11 +40,13 @@ export default function Home() {
             title,
           })),
         );
+        setLoading(false);
       })
       .catch((error) => {
         if (error.name !== "AbortError") {
           console.error("Failed to fetch announcements:", error);
           alert("お知らせの取得に失敗しました");
+          setLoading(false);
         }
       });
 
@@ -53,12 +56,26 @@ export default function Home() {
   return (
     <>
       <h1>情報伝達ページ</h1>
-      <Select label="学年: " options={grades} onChange={setGrade} />
-      <Select label="クラス: " options={classes} onChange={setClassName} />
+      <Select
+        label="学年: "
+        options={grades}
+        onChange={(value) => {
+          setLoading(true);
+          setGrade(value);
+        }}
+      />
+      <Select
+        label="クラス: "
+        options={classes}
+        onChange={(value) => {
+          setLoading(true);
+          setClassName(value);
+        }}
+      />
       <h2>お知らせ</h2>
       <List
-        items={announcements}
-        emptyMessage="お知らせはありません"
+        items={loading ? [] : announcements}
+        emptyMessage={loading ? "読み込み中・・・" : "お知らせはありません"}
         link="/info/"
       />
       <h2>減点状況</h2>
