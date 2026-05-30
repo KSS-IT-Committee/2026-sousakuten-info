@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
@@ -18,14 +18,14 @@ export default async function InfoPage({ params }: Props) {
   const { infoID } = await params;
   const id = Number(infoID);
   if (isNaN(id) || id <= 0) {
-    return <InvalidID />;
+    return notFound();
   }
   const [info, classes] = await Promise.all([
     getInfo(id),
     getAnnouncementClasses(id),
   ]);
   if (info === undefined) {
-    return <InvalidID />;
+    return notFound();
   }
   return (
     <>
@@ -37,20 +37,6 @@ export default async function InfoPage({ params }: Props) {
       <hr className={styles.hr} />
       <h2 className={styles.subtitle}>対象クラス</h2>
       <div className={styles.classes}>{classFormat(classes).join(" ")}</div>
-    </>
-  );
-}
-
-function InvalidID() {
-  return (
-    <>
-      <h1 className={styles.title}>#0 Error</h1>
-      <p className={styles.content}>
-        無効なIDです。
-        <Link href={"/"} className={styles.link}>
-          トップに戻る
-        </Link>
-      </p>
     </>
   );
 }

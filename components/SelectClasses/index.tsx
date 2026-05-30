@@ -51,6 +51,13 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
     }
   };
 
+  const classColor = {
+    A: "blue",
+    B: "red",
+    C: "green",
+    D: "white",
+  };
+
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
@@ -71,12 +78,6 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
           {CLASSES.map((c) => {
             const targets = GRADES.map((g) => `${g}${c}` as ClassName);
             const checked = targets.every((v) => value.includes(v));
-            const classColor = {
-              A: "blue",
-              B: "red",
-              C: "green",
-              D: "white",
-            };
             return (
               <th className={styles.th} key={c}>
                 <label className={styles.label}>

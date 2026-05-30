@@ -1,21 +1,30 @@
+"use client";
+
 import React from "react";
 
 import styles from "./Button.module.css";
 
 type ButtonProp = {
   children: React.ReactNode;
-  onClick: () => void;
   className?: string;
-  color?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 };
 
-export function Button({ children, onClick, className, color }: ButtonProp) {
+export function Button({
+  children,
+  className,
+  disabled,
+  onClick,
+  type,
+}: ButtonProp) {
   return (
     <button
-      type="button"
-      className={`${styles.button} ${className}`}
+      className={`${styles.button} ${className ?? ""}`}
+      type={type ?? "button"}
+      disabled={disabled}
       onClick={onClick}
-      style={{ backgroundColor: color }}
     >
       {children}
     </button>

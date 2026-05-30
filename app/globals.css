@@ -47,15 +47,15 @@
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  color: var(--foreground);
-  background-color: var(--background);
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 body {
   display: flex;
   flex-direction: column;
+  color: var(--foreground);
+  background-color: var(--background);
 }
 
 main {

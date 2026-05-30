@@ -8,13 +8,13 @@ export default async function Info() {
     getAllAnnouncements(),
     getAllAnnouncementClasses(),
   ]);
-  const items = announcements.map((item) => {
+  const items = announcements.map(({ id, date, title }, i) => {
     const formattedClasses = classFormat(
       classes
-        .filter(({ id: classId }) => classId === item.id)
+        .filter(({ id: classId }) => classId === id)
         .map(({ className }) => className),
-    ).join(" ");
-    return { ...item, subtext: formattedClasses };
+    ).join(", ");
+    return { id: i, param: id, date, title, subtext: formattedClasses };
   });
   return (
     <>

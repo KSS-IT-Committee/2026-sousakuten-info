@@ -35,7 +35,7 @@ export default function Home() {
           json.map(({ id, date, title }, i) => ({
             id: i,
             param: id,
-            date,
+            date: new Date(date),
             title,
           })),
         );

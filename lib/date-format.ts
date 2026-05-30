@@ -1,5 +1,4 @@
-export const dateFormat = (date_str: Date) => {
-  const date = new Date(date_str);
+export const dateFormat = (date: Date) => {
   return new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
     year: "numeric",

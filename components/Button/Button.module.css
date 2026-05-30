@@ -8,3 +8,7 @@
   border: none;
   border-radius: var(--radius);
 }
+
+.button:disabled {
+  background-color: var(--gray-8);
+}

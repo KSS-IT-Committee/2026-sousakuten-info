@@ -28,7 +28,7 @@ export function List({ items, emptyMessage, link }: ListProp) {
             return (
               <Link
                 key={id}
-                href={`${link}${param}`}
+                href={`${link}${param ?? ""}`}
                 className={`${styles.link} ${styles.record}`}
               >
                 <Record date={date} title={title} subtext={subtext} />

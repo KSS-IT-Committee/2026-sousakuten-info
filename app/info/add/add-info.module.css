@@ -10,10 +10,13 @@
   font-size: 18px;
 }
 
+.inputWrapper {
+  padding: 0px 3px;
+}
+
 .input,
 .textarea {
   display: block;
-  margin: 0px 3px;
   padding: 3px 5px;
   width: 100%;
   font-size: 16px;

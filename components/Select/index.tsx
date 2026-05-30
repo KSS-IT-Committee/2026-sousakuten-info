@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Select.module.css";
 
 type OptionProp = {

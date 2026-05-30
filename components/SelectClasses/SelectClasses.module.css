@@ -1,7 +1,6 @@
 .table {
   display: block;
   border-spacing: 0;
-  display: block;
   padding: 10px;
   user-select: none;
 }
@@ -10,7 +9,7 @@
   border-top-left-radius: var(--radius);
 }
 
-.thead .tr.th:last-child {
+.thead .tr .th:last-child {
   border-top-right-radius: var(--radius);
 }
 
@@ -33,7 +32,6 @@
 .th,
 .td {
   position: relative;
-  text-align: center;
   border: solid var(--border);
   border-width: 0px 1px 1px 0px;
 }
@@ -53,10 +51,12 @@
 }
 
 .label {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
   height: 45px;
   width: 90px;
-  padding: 10px 20px;
 }
 
 .classColor {
@@ -73,6 +73,7 @@
 
 @media screen and (max-width: 960px) {
   .table {
-    zoom: min(1, calc((100vw - 68px) / 450px));
+    transform-origin: top left;
+    transform: scale(min(1, calc((100vw - 68px) / 456px)));
   }
 }
