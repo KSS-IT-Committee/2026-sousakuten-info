@@ -70,7 +70,7 @@ export default function AddInfo() {
     >
       <div className={shared.titleRow}>
         <BackLink href="/info" />
-        <h1 className={styles.title}>お知らせを追加</h1>
+        <h1 className={shared.title}>お知らせを追加</h1>
       </div>
       <label className={styles.label}>
         <span className={styles.labelText}>タイトル</span>
@@ -93,7 +93,7 @@ export default function AddInfo() {
           ></textarea>
         </div>
       </label>
-      <h2 className={styles.subtitle}>対象クラス</h2>
+      <h2 className={shared.subtitle}>対象クラス</h2>
       <p>クラスを選択してください。</p>
       <p>{`選択中 : ${classFormat(classes).join(", ")}`}</p>
       <SelectClasses value={classes} onChange={setClasses} />

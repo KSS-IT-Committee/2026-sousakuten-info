@@ -8,7 +8,12 @@ type BackLinkProps = {
 
 export function BackLink({ href }: BackLinkProps) {
   return (
-    <Link href={href} className={styles.backLink} aria-label="上の階層に戻る">
+    <Link
+      href={href}
+      className={styles.backLink}
+      aria-label="上の階層に戻る"
+      title="戻る"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

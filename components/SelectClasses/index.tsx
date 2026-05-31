@@ -2,6 +2,7 @@
 
 import {
   Class,
+  CLASS_COLOR,
   CLASSES,
   ClassName,
   CLASSNAMES,
@@ -10,13 +11,6 @@ import {
 } from "@/lib/classes";
 
 import styles from "./SelectClasses.module.css";
-
-const CLASS_COLOR: Record<Class, string> = {
-  A: "blue",
-  B: "red",
-  C: "green",
-  D: "white",
-};
 
 type SelectClassesProps = {
   value?: ClassName[];

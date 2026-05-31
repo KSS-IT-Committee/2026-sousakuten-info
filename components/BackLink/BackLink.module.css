@@ -3,13 +3,13 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  height: 32px;
   width: 32px;
-  color: var(--gray-7);
+  color: var(--unselected-foreground);
+  transition: color 0.2s;
 }
 
 .backLink:hover {
-  color: var(--foreground);
+  color: var(--selectable-foreground);
 }
 
 .backLink svg {

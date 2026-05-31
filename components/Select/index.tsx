@@ -9,16 +9,18 @@ type OptionProp = {
 
 type SelectProp = {
   label?: string;
+  value?: string;
   options: OptionProp[];
   onChange: (value: string) => void;
 };
 
-export function Select({ label, options, onChange }: SelectProp) {
+export function Select({ label, value, options, onChange }: SelectProp) {
   return (
     <label className={styles.label}>
       <span className={styles.labelText}>{label ?? ""}</span>
       <select
         className={styles.select}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       >
         {options.map(({ value, label }) => (

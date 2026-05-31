@@ -27,24 +27,6 @@
   background-color: var(--background);
 }
 
-/* prev (back) */
-.prev {
-  display: flex;
-  height: 64px;
-  width: 40px;
-  align-items: center;
-  justify-content: center;
-  color: var(--foreground);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.prev svg {
-  height: 24px;
-  width: 24px;
-}
-
 .home {
   display: flex;
   height: 64px;
@@ -133,7 +115,6 @@
   display: none;
   background: none;
   border: none;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 960px) {

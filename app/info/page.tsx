@@ -3,6 +3,8 @@ import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
 import { classFormat } from "@/lib/class-format";
 
+import shared from "../shared.module.css";
+
 export default async function Info() {
   const [announcements, classes] = await Promise.all([
     getAllAnnouncements(),
@@ -18,7 +20,7 @@ export default async function Info() {
   });
   return (
     <>
-      <h1>お知らせ一覧</h1>
+      <h1 className={shared.title}>お知らせ一覧</h1>
       <List
         items={items}
         emptyMessage="お知らせはありません"

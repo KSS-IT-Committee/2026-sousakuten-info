@@ -51,13 +51,11 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <button
-          type="button"
+        <div
           className={styles.back}
           onClick={closeOpen}
           aria-label="メニューを閉じる"
-          tabIndex={isOpen ? 0 : -1}
-        ></button>
+        ></div>
       </div>
     </header>
   );
