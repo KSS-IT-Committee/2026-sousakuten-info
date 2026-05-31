@@ -46,7 +46,7 @@ export default async function InfoPage({ params, searchParams }: Props) {
       </p>
       <hr className={styles.hr} />
       <h2 className={shared.subtitle}>対象クラス</h2>
-      <div className={styles.classes}>{classFormat(classes).join(" ")}</div>
+      <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
     </>
   );
 }
