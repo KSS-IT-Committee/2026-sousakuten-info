@@ -8,6 +8,7 @@ import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
 
 import shared from "../../shared.module.css";
+import { DeleteAnnouncementButton } from "./DeleteAnnouncementButton";
 import styles from "./info-page.module.css";
 
 type Props = {
@@ -47,6 +48,7 @@ export default async function InfoPage({ params, searchParams }: Props) {
       <hr className={styles.hr} />
       <h2 className={shared.subtitle}>対象クラス</h2>
       <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
+      <DeleteAnnouncementButton id={id} />
     </>
   );
 }
