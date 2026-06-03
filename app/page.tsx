@@ -10,7 +10,7 @@ import shared from "./shared.module.css";
 
 export default function Home() {
   const [grade, setGrade] = useState<Grade>(() => {
-    if (typeof window === "undefined") return "1";
+    if (typeof window === "undefined") return "1"; // this branch runs during SSR because the server-side doesn't have a window
     const savedValue = localStorage.getItem("selectedGrade");
     return savedValue && isGrade(savedValue) ? (savedValue as Grade) : "1";
   });
