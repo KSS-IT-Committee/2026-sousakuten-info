@@ -1,13 +1,11 @@
 .footer {
-  position: absolute;
   display: block;
-  bottom: 0px;
   padding: 30px;
   width: 100%;
   text-align: center;
   font-size: 16px;
   color: white;
-  background: linear-gradient(150deg, #0b69eb 70%, #ffffff 100%);
+  background: linear-gradient(150deg, var(--dark-blue) 70%, white 100%);
 }
 
 .footerTheme {
@@ -21,7 +19,7 @@
   white-space: nowrap;
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 960px) {
   .footer {
     font-size: 13px;
   }

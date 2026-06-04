@@ -35,3 +35,17 @@ export const CLASSES = ["A", "B", "C", "D"] as const;
 
 export type Grade = (typeof GRADES)[number];
 export type Class = (typeof CLASSES)[number];
+
+export const isGrade = (value: string) => {
+  return (GRADES as readonly string[]).includes(value);
+};
+export const isClass = (value: string) => {
+  return (CLASSES as readonly string[]).includes(value);
+};
+
+export const CLASS_COLOR: Record<Class, string> = {
+  A: "blue",
+  B: "red",
+  C: "green",
+  D: "white",
+};

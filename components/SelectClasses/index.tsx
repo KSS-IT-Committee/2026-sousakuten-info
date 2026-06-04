@@ -2,12 +2,15 @@
 
 import {
   Class,
+  CLASS_COLOR,
   CLASSES,
   ClassName,
   CLASSNAMES,
   Grade,
   GRADES,
 } from "@/lib/classes";
+
+import styles from "./SelectClasses.module.css";
 
 type SelectClassesProps = {
   value?: ClassName[];
@@ -50,13 +53,14 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <label>
+    <table className={styles.table}>
+      <thead className={styles.thead}>
+        <tr className={styles.tr}>
+          <th className={styles.th}>
+            <label className={styles.label}>
               全て
               <input
+                className={styles.checkbox}
                 type="checkbox"
                 checked={CLASSNAMES.every((className) =>
                   value.includes(className),
@@ -69,10 +73,17 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
             const targets = GRADES.map((g) => `${g}${c}` as ClassName);
             const checked = targets.every((v) => value.includes(v));
             return (
-              <th key={c}>
-                <label>
+              <th className={styles.th} key={c}>
+                <label className={styles.label}>
+                  <div
+                    className={styles.classColor}
+                    style={{
+                      backgroundColor: `var(--class-${CLASS_COLOR[c]})`,
+                    }}
+                  ></div>
                   {c}組
                   <input
+                    className={styles.checkbox}
                     type="checkbox"
                     checked={checked}
                     onChange={(e) => toggleClassGroup(c, e.target.checked)}
@@ -83,16 +94,17 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
           })}
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.tbody}>
         {GRADES.map((g) => {
           const gradeTargets = CLASSES.map((c) => `${g}${c}` as ClassName);
           const gradeChecked = gradeTargets.every((v) => value.includes(v));
           return (
-            <tr key={g}>
-              <th>
-                <label>
+            <tr className={styles.tr} key={g}>
+              <th className={styles.th}>
+                <label className={styles.label}>
                   {g}年
                   <input
+                    className={styles.checkbox}
                     type="checkbox"
                     checked={gradeChecked}
                     onChange={(e) => toggleGrade(g, e.target.checked)}
@@ -102,10 +114,11 @@ export function SelectClasses({ value = [], onChange }: SelectClassesProps) {
               {CLASSES.map((c) => {
                 const v = `${g}${c}` as ClassName;
                 return (
-                  <td key={v}>
-                    <label>
+                  <td className={styles.td} key={v}>
+                    <label className={styles.label}>
                       {v}
                       <input
+                        className={styles.checkbox}
                         type="checkbox"
                         checked={value.includes(v)}
                         onChange={(e) => toggleClass(v, e.target.checked)}

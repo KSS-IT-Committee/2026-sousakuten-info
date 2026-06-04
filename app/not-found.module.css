@@ -1,0 +1,10 @@
+.text {
+  padding: 15px 0px;
+}
+
+.link {
+  display: block;
+  padding: 10px 0px;
+  font-size: 18px;
+  color: var(--blue);
+}

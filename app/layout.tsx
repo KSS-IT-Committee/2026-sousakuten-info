@@ -3,6 +3,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
 
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+
 export const metadata: Metadata = {
   title: "情報伝達ページ",
   description: "情報伝達ページ - KITeC",
@@ -49,7 +52,11 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

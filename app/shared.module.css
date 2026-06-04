@@ -1,0 +1,13 @@
+.titleRow {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.title {
+  padding: 5px 0px;
+}
+
+.subtitle {
+  padding: 5px 0px;
+}

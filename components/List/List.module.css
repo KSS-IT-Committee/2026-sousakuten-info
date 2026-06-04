@@ -1,0 +1,51 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.record {
+  position: relative;
+  display: flex;
+  height: 40px;
+  color: var(--selectable-foreground);
+  align-items: center;
+}
+
+.record:hover {
+  color: var(--selected-foreground);
+}
+
+.record::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background-color: var(--border);
+  border-radius: 100%;
+}
+
+.date {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  flex: 1;
+  padding-left: 10px;
+}
+
+.subtext {
+  font-size: 14px;
+  color: var(--gray-5);
+}
+
+.emptyMessage {
+  padding: 0px 10px;
+  font-size: 16px;
+}
