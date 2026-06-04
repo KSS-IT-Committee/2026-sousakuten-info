@@ -31,18 +31,26 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QEP1YJ7MBL"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
+        {/* Google tag (gtag.js) — skipped on PR preview deployments.
+            IS_PR_PREVIEW is injected at runtime by the deploy infra and read
+            here server-side, so it must NOT be NEXT_PUBLIC_ (those inline at
+            build time). */}
+        {process.env.IS_PR_PREVIEW !== "true" && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-QEP1YJ7MBL"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-QEP1YJ7MBL');
   `}
-        </Script>
+            </Script>
+          </>
+        )}
       </head>
       <body>
         <Header />
