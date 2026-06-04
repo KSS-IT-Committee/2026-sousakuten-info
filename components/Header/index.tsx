@@ -24,7 +24,7 @@ export function Header() {
     <header className={`${styles.header} ${isOpen ? styles.open : ""}`}>
       <div className={styles.container}>
         <div className={styles.menu}>
-          <a href="sosakuten-top-page" className={styles.home}>
+          <a href="sousakuten-top-page" className={styles.home}>
             {/* 創作展 */}
             <Image
               src="/theme/event-week.png"
