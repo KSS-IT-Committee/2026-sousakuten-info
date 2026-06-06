@@ -5,14 +5,10 @@ import postgres from "postgres";
 
 import * as schema from "@/db/schema";
 
-declare global {
-  // Reuse the pool across HMR reloads in dev to avoid leaking connections.
-  let pgClient: ReturnType<typeof postgres> | undefined;
-}
-
 type Db = PostgresJsDatabase<typeof schema>;
 const MAX_DB_CONNECTIONS = 10;
 const globalForDb = globalThis as typeof globalThis & {
+  // Reuse the pool across HMR reloads in dev to avoid leaking connections.
   pgClient?: ReturnType<typeof postgres>;
 };
 let _db: Db | undefined;
