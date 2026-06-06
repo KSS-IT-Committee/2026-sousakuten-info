@@ -76,8 +76,8 @@ Use **camelCase** for regular functions. Use **PascalCase** for React components
 
 ```typescript
 // ✅ Correct (regular functions)
-const fetchUserData = () => { }
-const validateInput = () => { }
+function fetchUserData() { }
+function validateInput() { }
 
 // ✅ Correct (React components)
 function IconCard() { return <div>...</div>; }
@@ -191,7 +191,9 @@ const user = {
   age: 30,
 };
 
-const add = (a, b) => a + b;
+function add(a, b) {
+  return a + b;
+}
 ```
 
 ## Tool Usage

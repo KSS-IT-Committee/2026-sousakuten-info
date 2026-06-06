@@ -7,18 +7,23 @@ import * as schema from "@/db/schema";
 
 declare global {
   // Reuse the pool across HMR reloads in dev to avoid leaking connections.
-  var pgClient: ReturnType<typeof postgres> | undefined;
+  let pgClient: ReturnType<typeof postgres> | undefined;
 }
 
 type Db = PostgresJsDatabase<typeof schema>;
+const MAX_DB_CONNECTIONS = 10;
+const globalForDb = globalThis as typeof globalThis & {
+  pgClient?: ReturnType<typeof postgres>;
+};
 let _db: Db | undefined;
 
 function getDb(): Db {
   if (_db) return _db;
   const databaseUrl = process.env.DATABASE_URL;
   if (!databaseUrl) throw new Error("DATABASE_URL is not set");
-  const client = global.pgClient ?? postgres(databaseUrl, { max: 10 });
-  if (process.env.NODE_ENV !== "production") global.pgClient = client;
+  const client =
+    globalForDb.pgClient ?? postgres(databaseUrl, { max: MAX_DB_CONNECTIONS });
+  if (process.env.NODE_ENV !== "production") globalForDb.pgClient = client;
   _db = drizzle(client, { schema });
   return _db;
 }
