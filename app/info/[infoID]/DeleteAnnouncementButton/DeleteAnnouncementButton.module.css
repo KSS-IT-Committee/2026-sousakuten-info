@@ -1,0 +1,7 @@
+.wrapper {
+  padding: 7px 0px;
+}
+
+.button {
+  background-color: var(--red);
+}

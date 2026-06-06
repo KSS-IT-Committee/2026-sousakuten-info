@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
   }
   try {
     await addAnnouncement({ title, body, classes } as AddAnnouncementProps);
+    revalidatePath("/info");
     return Response.json({ success: true });
   } catch (error) {
     console.error("Failed to add announcement:", error);
