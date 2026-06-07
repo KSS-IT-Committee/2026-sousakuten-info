@@ -30,3 +30,13 @@
   min-height: 70px;
   resize: vertical;
 }
+
+@media (prefers-color-scheme: dark) {
+  .input,
+  .textarea {
+    background-color: var(--gray-2);
+    color: var(--gray-f);
+    box-shadow: 0px 0px 5px var(--gray-7);
+    outline: 1px solid var(--gray-7);
+  }
+}

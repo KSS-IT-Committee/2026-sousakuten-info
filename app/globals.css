@@ -85,3 +85,13 @@ p {
 a {
   text-decoration: none;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--gray-2);
+    --foreground: var(--gray-f);
+    --selectable-foreground: var(--gray-c);
+    --selected-foreground: var(--gray-d);
+    --unselected-foreground: var(--gray-7);
+  }
+}
