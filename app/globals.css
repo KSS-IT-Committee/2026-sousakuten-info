@@ -93,5 +93,6 @@ a {
     --selectable-foreground: var(--gray-c);
     --selected-foreground: var(--gray-d);
     --unselected-foreground: var(--gray-7);
+    --border: var(--gray-c);
   }
 }
