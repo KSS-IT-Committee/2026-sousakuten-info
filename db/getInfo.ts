@@ -5,6 +5,9 @@ import { announcements } from "@/db/schema";
 import { db } from "@/lib/db";
 
 export async function getInfo(infoID: number) {
+  if (!Number.isInteger(infoID) || infoID <= 0) {
+    throw new Error("Invalid id");
+  }
   await connection();
   const [result] = await db
     .select()

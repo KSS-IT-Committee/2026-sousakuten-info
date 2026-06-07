@@ -1,7 +1,7 @@
 import { desc, eq } from "drizzle-orm";
 import { connection } from "next/server";
 
-import { ClassName } from "@/lib/classes";
+import { ClassName, isClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
 
 import { announcementClasses, announcements } from "./schema";
@@ -13,6 +13,9 @@ export type AnnouncementsReturn = {
 }[];
 
 export async function getAnnouncements(className: ClassName) {
+  if (!isClassName(className)) {
+    throw new Error("Invalid className");
+  }
   await connection();
   const result: AnnouncementsReturn = await db
     .select({
