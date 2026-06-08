@@ -7,6 +7,7 @@ import styles from "./Button.module.css";
 type ButtonProp = {
   children: React.ReactNode;
   className?: string;
+  title?: string;
   disabled?: boolean;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
@@ -15,6 +16,7 @@ type ButtonProp = {
 export function Button({
   children,
   className,
+  title,
   disabled,
   onClick,
   type,
@@ -22,6 +24,7 @@ export function Button({
   return (
     <button
       className={`${styles.button} ${className ?? ""}`}
+      title={title}
       type={type ?? "button"}
       disabled={disabled}
       onClick={onClick}
