@@ -3,7 +3,7 @@
   top: 0px;
   height: 65px;
   background-color: var(--background);
-  border-bottom: 1px solid var(--foreground);
+  border-bottom: 1px solid var(--gray-e);
   box-shadow: 0px 4px 20px #0001;
   z-index: 1000;
 }
@@ -169,5 +169,12 @@
   .open .back {
     display: block;
     flex: 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    border-bottom: var(--gray-2);
+    box-shadow: 0px 4px 20px #fff2;
   }
 }
