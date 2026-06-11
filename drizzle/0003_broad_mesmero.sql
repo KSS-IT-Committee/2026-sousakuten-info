@@ -8,7 +8,8 @@ CREATE TABLE "sessions" (
 --> statement-breakpoint
 CREATE TABLE "users" (
 	"username" varchar(32) PRIMARY KEY NOT NULL,
-	"password_hash" varchar(60) NOT NULL
+	"password_hash" varchar(60) NOT NULL,
+	"has_logged_in" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
 ALTER TABLE "borrowings" ALTER COLUMN "class" SET DATA TYPE "public"."class_name" USING "class"::"public"."class_name";--> statement-breakpoint
