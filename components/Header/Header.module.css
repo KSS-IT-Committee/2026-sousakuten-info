@@ -37,6 +37,21 @@
   align-items: center;
 }
 
+/* Login control: sits next to the logo on desktop, pushed beside the
+   hamburger on mobile (where .menu spans the full width). */
+.account {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+}
+
+@media screen and (max-width: 960px) {
+  .account {
+    margin-left: auto;
+    margin-right: 12px;
+  }
+}
+
 .home * {
   height: 64px;
   width: auto;

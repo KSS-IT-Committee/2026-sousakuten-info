@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import styles from "./Header.module.css";
 
@@ -12,7 +12,13 @@ const items = [
   { text: "お知らせを追加", url: "/info/add" },
 ];
 
-export function Header() {
+type HeaderProps = {
+  // Server-rendered login control, passed in from the layout (this is a
+  // client component, so it can't render the async AccountNav itself).
+  accountSlot?: ReactNode;
+};
+
+export function Header({ accountSlot }: HeaderProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -33,6 +39,9 @@ export function Header() {
               width={930}
             />
           </a>
+          {accountSlot ? (
+            <div className={styles.account}>{accountSlot}</div>
+          ) : null}
           <button
             type="button"
             className={styles.hamburger}
