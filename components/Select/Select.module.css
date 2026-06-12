@@ -13,11 +13,11 @@
   padding: 3px 5px;
   background-color: var(--background);
   border-radius: var(--radius);
-  border: 1px solid var(--gray-a);
+  border: 1px solid var(--gray-c);
 }
 
 @media (prefers-color-scheme: dark) {
   .select {
-    border: 1px solid var(--gray-7);
+    border: 1px solid var(--gray-4);
   }
 }

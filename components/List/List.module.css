@@ -52,6 +52,6 @@
 
 @media (prefers-color-scheme: dark) {
   .subtext {
-    color: var(--gray-4);
+    color: var(--gray-b);
   }
 }
