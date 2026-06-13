@@ -2,7 +2,7 @@
   position: sticky;
   top: 0px;
   height: 65px;
-  background-color: var(--background);
+  background-color: var(--gray-f);
   border-bottom: 1px solid var(--gray-e);
   box-shadow: 0px 4px 20px #0001;
   z-index: 1000;
@@ -24,7 +24,7 @@
 .menu {
   display: flex;
   justify-content: space-between;
-  background-color: var(--background);
+  background-color: var(--gray-f);
 }
 
 .home {
@@ -61,7 +61,7 @@
   display: block;
   height: 2px;
   width: 27px;
-  background-color: var(--foreground);
+  background-color: var(--gray-2);
   border-radius: 2px;
   transition: all 0.3s;
 }
@@ -89,7 +89,7 @@
 /* nav */
 .nav {
   display: flex;
-  background-color: var(--background);
+  background-color: var(--gray-f);
 }
 
 .nav > * {
@@ -97,17 +97,17 @@
   padding: 0px 10px;
   height: 64px;
   font-size: 16px;
-  color: var(--selectable-foreground);
+  color: var(--gray-3);
   align-items: center;
   transition: color 0.2s;
 }
 
 .nav:has(:hover) > * {
-  color: var(--unselected-foreground);
+  color: var(--gray-9);
 }
 
 .nav:has(:hover) > *:hover {
-  color: var(--selected-foreground);
+  color: var(--gray-2);
 }
 
 /* back */
@@ -169,12 +169,5 @@
   .open .back {
     display: block;
     flex: 1;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .header {
-    border-bottom-color: var(--gray-2);
-    box-shadow: 0px 4px 20px #fff2;
   }
 }
