@@ -36,6 +36,19 @@
   --class-white: #ddd;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--gray-2);
+    --foreground: var(--gray-d);
+
+    --selectable-foreground: var(--gray-c);
+    --selected-foreground: var(--gray-d);
+    --unselected-foreground: var(--gray-8);
+
+    --border: var(--gray-5);
+  }
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -84,4 +97,10 @@ p {
 
 a {
   text-decoration: none;
+}
+
+input,
+button,
+textarea {
+  background-color: inherit;
 }

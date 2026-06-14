@@ -23,3 +23,13 @@
   padding: 10px 0px;
   color: var(--blue);
 }
+
+@media (prefers-color-scheme: dark) {
+  .date {
+    color: var(--gray-8);
+  }
+
+  .classes {
+    color: var(--gray-b);
+  }
+}
