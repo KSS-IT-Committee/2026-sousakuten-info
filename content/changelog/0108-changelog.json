@@ -1,0 +1,5 @@
+{
+  "title": "Bump @types/node from 20.19.40 to 25.9.3",
+  "description": "パッケージのバージョンを上げました。これによるページの変更はありません。",
+  "credits": ["@dependabot[bot]"]
+}
