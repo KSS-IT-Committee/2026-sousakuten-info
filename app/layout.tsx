@@ -3,8 +3,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
 
+import { AccountNav } from "@/components/AccountNav";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { NoScriptAlert } from "@/components/NoScriptAlert";
 
 export const metadata: Metadata = {
   title: "情報伝達ページ",
@@ -53,7 +55,8 @@ export default function RootLayout({
         )}
       </head>
       <body>
-        <Header />
+        <NoScriptAlert />
+        <Header accountSlot={<AccountNav />} />
         <main>{children}</main>
         <Footer />
       </body>
