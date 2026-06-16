@@ -49,3 +49,9 @@
   padding: 0px 10px;
   font-size: 16px;
 }
+
+@media (prefers-color-scheme: dark) {
+  .subtext {
+    color: var(--gray-b);
+  }
+}

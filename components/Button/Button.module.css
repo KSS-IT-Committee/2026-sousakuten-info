@@ -13,3 +13,9 @@
 .button:disabled {
   background-color: var(--gray-8);
 }
+
+@media (prefers-color-scheme: dark) {
+  .button:disabled {
+    background-color: var(--gray-7);
+  }
+}
