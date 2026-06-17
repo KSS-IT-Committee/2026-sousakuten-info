@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
     // flag; pairs with app/forbidden.tsx.
     authInterrupts: true,
   },
+  // Self-contained build output (.next/standalone + a minimal server.js) so the
+  // production Docker image ships only traced runtime deps. The runner serves
+  // with `node server.js` instead of `next start`.
+  output: "standalone",
 };
 
 export default nextConfig;
