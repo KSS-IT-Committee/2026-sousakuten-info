@@ -1,5 +1,5 @@
 {
   "title": "使用されていないエクスポート・ファイル・パッケージの削除",
-  "description": "使用されてないエクスポートAnnouncementsClassesReturn,コンポーネントAccountBarを削除し、tailwindcssをアンインストールしました。これによるページの変更はありません。",
+  "description": "使用されていないエクスポート AnnouncementsClassesReturn とコンポーネント AccountBar を削除し、tailwindcss をアンインストールしました。これによるページの変更はありません。",
   "credits": ["@hatuna-827"]
 }
