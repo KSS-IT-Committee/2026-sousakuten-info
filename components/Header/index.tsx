@@ -30,8 +30,7 @@ export function Header({ accountSlot }: HeaderProps) {
     <header className={`${styles.header} ${isOpen ? styles.open : ""}`}>
       <div className={styles.container}>
         <div className={styles.menu}>
-          <a href="sousakuten-top-page" className={styles.home}>
-            {/* 創作展 */}
+          <a href="https://top.2026.kss-it.com/" className={styles.home}>
             <Image
               src="/theme/event-week.png"
               alt="創作展"
