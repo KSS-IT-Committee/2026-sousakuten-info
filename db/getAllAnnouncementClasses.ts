@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 
 import { announcementClasses, announcements } from "./schema";
 
-export type AnnouncementsClassesReturn = {
+type AnnouncementsClassesReturn = {
   id: number;
   className: ClassName;
 };
