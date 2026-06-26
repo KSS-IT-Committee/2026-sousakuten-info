@@ -10,6 +10,7 @@ const items = [
   { text: "クラスページ", url: "/" },
   { text: "お知らせを管理", url: "/info" },
   { text: "お知らせを追加", url: "/info/add" },
+  { text: "新機能追加の要望", url: "/requests" },
 ];
 
 type HeaderProps = {
