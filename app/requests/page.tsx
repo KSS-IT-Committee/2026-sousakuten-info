@@ -40,7 +40,9 @@ export default function RequestPage() {
       <p className={styles.description}>
         <Link
           className={styles.link}
-          href={"https://github.com/KSS-IT-Committee/2026-sousakuten-info"}
+          href={
+            "https://github.com/KSS-IT-Committee/2026-sousakuten-info/issues"
+          }
         >
           このページのリポジトリ
         </Link>
