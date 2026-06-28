@@ -41,7 +41,7 @@ export default function RequestPage() {
         <Link
           className={styles.link}
           href={
-            "https://github.com/KSS-IT-Committee/2026-sousakuten-info/issues"
+            "https://github.com/KSS-IT-Committee/2026-sousakuten-info/issues/new"
           }
         >
           このページのリポジトリ
