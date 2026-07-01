@@ -67,7 +67,9 @@ jobs:
 
       - name: Commit
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN の push は workflow をトリガーせず、追加コミットが
+          # CI 未検証のままマージされてしまうため PAT で push する
+          GH_TOKEN: ${{ secrets.ROTARYMARS_PR_ACTION_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
