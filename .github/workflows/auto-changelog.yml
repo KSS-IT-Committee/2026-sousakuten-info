@@ -22,19 +22,19 @@ jobs:
           FILE="content/changelog/$(printf "%04d" ${{ github.event.pull_request.number }}).json"
 
           if [[ "$BRANCH" == dependabot/github_actions/* ]]; then
-          DESCRIPTION="Actionのバージョンを上げました。これによるページの変更はありません。"
+            DESCRIPTION="Actionのバージョンを上げました。これによるページの変更はありません。"
           elif [[ "$BRANCH" == dependabot/npm_and_yarn/* ]]; then
-          DESCRIPTION="パッケージのバージョンを上げました。これによるページの変更はありません。"
+            DESCRIPTION="パッケージのバージョンを上げました。これによるページの変更はありません。"
           else
-          DESCRIPTION="追記必須。"
+            DESCRIPTION="追記必須。"
           fi
 
           {
-          echo "{"
-          echo "  \"title\": \"${{ github.event.pull_request.title }}\","
-          echo "  \"description\": \"$DESCRIPTION\","
-          echo '  "credits": ["@dependabot[bot]"]'
-          echo "}"
+            echo "{"
+            echo "  \"title\": \"${{ github.event.pull_request.title }}\","
+            echo "  \"description\": \"$DESCRIPTION\","
+            echo '  "credits": ["@dependabot[bot]"]'
+            echo "}"
           } > "$FILE"
 
       - name: Commit
