@@ -2,17 +2,22 @@ name: Auto Changelog
 
 on:
   pull_request_target:
-    # synchronize: dependabot の recreate (force-push) でエントリが消えたら
-    # 再追加する。ワークフロー自身の GITHUB_TOKEN push は workflow を
-    # トリガーしないためループにはならない
+    # synchronize: dependabot の recreate (force-push) などでエントリが
+    # 消えたら再追加する。既にエントリがあれば何もしないためループしない
     types: [opened, synchronize]
 
 permissions:
   contents: write
 
+# 同一 PR で opened と synchronize が同時に走って push が衝突しないよう直列化
+concurrency:
+  group: auto-changelog-${{ github.event.pull_request.number }}
+
 jobs:
   create-file:
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    # fork からの PR は対象外: pull_request_target は secrets と書き込み権限を
+    # 持つため、fork のコード (package.json など) を扱ってはいけない
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     steps:
@@ -27,26 +32,33 @@ jobs:
           BRANCH: ${{ github.event.pull_request.head.ref }}
           TITLE: ${{ github.event.pull_request.title }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          mkdir -p content/changelog
-
           FILE="content/changelog/$(printf "%04d" "$PR_NUMBER")-changelog.json"
+
+          # 既にエントリがあれば上書きしない (手動で記入した説明を守る)
+          if [ -f "$FILE" ]; then
+            exit 0
+          fi
+
+          mkdir -p content/changelog
 
           if [[ "$BRANCH" == dependabot/github_actions/* ]]; then
             DESCRIPTION="Actionのバージョンを上げました。これによるページの変更はありません。"
           elif [[ "$BRANCH" == dependabot/npm_and_yarn/* ]]; then
             DESCRIPTION="パッケージのバージョンを上げました。これによるページの変更はありません。"
           else
-            DESCRIPTION="追記必須。"
+            DESCRIPTION="TODO"
           fi
 
           jq -n \
             --arg title "$TITLE" \
             --arg description "$DESCRIPTION" \
+            --arg author "@$AUTHOR" \
             '{
               title: $title,
               description: $description,
-              credits: ["@dependabot[bot]"]
+              credits: [$author]
             }' > "$FILE"
 
           # jq の整形は Prettier と一致しないため、マージ後 main の
@@ -57,6 +69,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -70,4 +83,4 @@ jobs:
           git remote set-url origin \
             "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
 
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          git push origin "HEAD:$BRANCH"
