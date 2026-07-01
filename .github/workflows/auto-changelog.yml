@@ -1,0 +1,47 @@
+on:
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  contents: write
+
+jobs:
+  create-file:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Write log
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          FILE="content/changelog/$(printf "%04d" ${{ github.event.pull_request.number }}).json"
+
+          if [[ "$BRANCH" == dependabot/github_actions/* ]]; then
+          DESCRIPTION="Actionのバージョンを上げました。これによるページの変更はありません。"
+          elif [[ "$BRANCH" == dependabot/npm_and_yarn/* ]]; then
+          DESCRIPTION="パッケージのバージョンを上げました。これによるページの変更はありません。"
+          else
+          DESCRIPTION="追記必須。"
+          fi
+
+          {
+          echo "{"
+          echo "  \"title\": \"${{ github.event.pull_request.title }}\","
+          echo "  \"description\": \"$DESCRIPTION\","
+          echo '  "credits": ["@dependabot[bot]"]'
+          echo "}"
+          } > "$FILE"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/changelog
+          git commit -m "Add Changelog" || exit 0
+          git push
