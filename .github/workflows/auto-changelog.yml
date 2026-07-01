@@ -46,6 +46,10 @@ jobs:
               credits: ["@dependabot[bot]"]
             }' > "$FILE"
 
+          # jq の整形は Prettier と一致しないため、マージ後 main の
+          # format:check が落ちないようにリポジトリと同じ Prettier で整形する
+          npx --yes "prettier@$(node -p 'require("./package.json").devDependencies.prettier')" --write "$FILE"
+
       - name: Commit
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
