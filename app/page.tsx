@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+import { FloatingMenu } from "@/components/FloatingMenu";
 import { List, ListItems } from "@/components/List";
 import { Select } from "@/components/Select";
 import { AnnouncementsReturn } from "@/db/getAnnouncements";
@@ -109,6 +110,12 @@ export default function Home() {
       />
       <h2 className={shared.subtitle}>減点状況</h2>
       <List items={[]} emptyMessage="減点はありません" />
+      <FloatingMenu
+        items={[
+          { label: "お知らせを管理", href: "/info" },
+          { label: "お知らせを追加", href: "/info/add" },
+        ]}
+      />
     </>
   );
 }

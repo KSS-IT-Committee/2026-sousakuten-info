@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { BackLink } from "@/components/BackLink";
+import { FloatingMenu } from "@/components/FloatingMenu";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
@@ -49,6 +50,12 @@ export default async function InfoPage({ params, searchParams }: Props) {
       <h2 className={shared.subtitle}>対象クラス</h2>
       <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
       <DeleteAnnouncementButton id={id} />
+      <FloatingMenu
+        items={[
+          { label: "クラスページ", href: "/" },
+          { label: "お知らせを管理", href: "/info" },
+        ]}
+      />
     </>
   );
 }
