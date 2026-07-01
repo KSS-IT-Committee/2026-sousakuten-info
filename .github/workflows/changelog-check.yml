@@ -1,0 +1,27 @@
+name: Changelog Check
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  no-todo:
+    name: No TODO in changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check changelog descriptions for TODO
+        run: |
+          FOUND=0
+          for f in content/changelog/*.json; do
+            if jq -e '.description | contains("TODO")' "$f" > /dev/null; then
+              echo "::error file=$f::説明が TODO のままです。マージ前に内容を記入してください。"
+              FOUND=1
+            fi
+          done
+          exit "$FOUND"
