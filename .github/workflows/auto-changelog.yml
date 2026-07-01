@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p content/changelog
 
-          FILE="content/changelog/$(printf "%04d" "$PR_NUMBER").json"
+          FILE="content/changelog/$(printf "%04d" "$PR_NUMBER")-changelog.json"
 
           if [[ "$BRANCH" == dependabot/github_actions/* ]]; then
             DESCRIPTION="Actionのバージョンを上げました。これによるページの変更はありません。"
