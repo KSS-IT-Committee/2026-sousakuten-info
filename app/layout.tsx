@@ -3,9 +3,8 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 
-import { AccountNav } from "@/components/AccountNav";
+import { AccountBar } from "@/components/AccountNav/AccountBar";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { NoScriptAlert } from "@/components/NoScriptAlert";
 
 // Google Analytics 4 measurement ID for this app's GA property.
@@ -37,7 +36,7 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <NoScriptAlert />
-        <Header accountSlot={<AccountNav />} />
+        <AccountBar />
         <main>{children}</main>
         <Footer />
       </body>

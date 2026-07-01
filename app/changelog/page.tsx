@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { FloatingMenu } from "@/components/FloatingMenu";
 import changelog from "@/lib/changelog.generated.json";
 
 import styles from "./changelog.module.css";
@@ -69,6 +70,7 @@ export default function ChangelogPage() {
           ))}
         </ol>
       )}
+      <FloatingMenu items={[{ label: "クラスページ", href: "/" }]} />
     </>
   );
 }

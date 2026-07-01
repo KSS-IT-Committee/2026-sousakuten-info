@@ -1,3 +1,4 @@
+import { FloatingMenu } from "@/components/FloatingMenu";
 import { List } from "@/components/List";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
@@ -26,6 +27,12 @@ export default async function Info() {
         emptyMessage="お知らせはありません"
         link="/info/"
         query="?from=/info"
+      />
+      <FloatingMenu
+        items={[
+          { label: "クラスページ", href: "/" },
+          { label: "お知らせを追加", href: "/info/add" },
+        ]}
       />
     </>
   );
