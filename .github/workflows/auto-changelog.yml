@@ -2,7 +2,10 @@ name: Auto Changelog
 
 on:
   pull_request_target:
-    types: [opened]
+    # synchronize: dependabot の recreate (force-push) でエントリが消えたら
+    # 再追加する。ワークフロー自身の GITHUB_TOKEN push は workflow を
+    # トリガーしないためループにはならない
+    types: [opened, synchronize]
 
 permissions:
   contents: write
