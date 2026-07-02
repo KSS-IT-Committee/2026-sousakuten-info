@@ -19,8 +19,13 @@ jobs:
         run: |
           FOUND=0
           for f in content/changelog/*.json; do
-            if jq -e '.description | contains("TODO")' "$f" > /dev/null; then
+            STATUS=0
+            jq -e '.description | contains("TODO")' "$f" > /dev/null || STATUS=$?
+            if [ "$STATUS" -eq 0 ]; then
               echo "::error file=$f::説明が TODO のままです。マージ前に内容を記入してください。"
+              FOUND=1
+            elif [ "$STATUS" -ne 1 ]; then
+              echo "::error file=$f::JSON が不正か、description が文字列ではありません。"
               FOUND=1
             fi
           done
