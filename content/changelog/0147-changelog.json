@@ -1,5 +1,5 @@
 {
-  "title": "Feature/floating menu",
-  "description": "TODO",
+  "title": "フローティングメニューの追加",
+  "description": "フローティングメニューを追加しました。これによりページのUIが一部統一されました。",
   "credits": ["@rotarymars"]
 }
