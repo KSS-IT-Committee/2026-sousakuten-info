@@ -1,9 +1,9 @@
 import "server-only";
 
 import { ROLENAMES } from "@/db/schema";
+import { ClassName } from "@/lib/classes";
 import type { SessionUser } from "@/lib/session";
 import { classOf } from "@/lib/user-category";
-import { ClassName } from "./classes";
 
 export type Role = (typeof ROLENAMES)[number];
 
