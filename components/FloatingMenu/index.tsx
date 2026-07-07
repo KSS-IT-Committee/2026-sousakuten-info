@@ -37,6 +37,11 @@ export function FloatingMenu({
     }
   }, []);
 
+  const collapseNow = useCallback(() => {
+    cancelCollapse();
+    setIsOpen(false);
+  }, [cancelCollapse]);
+
   useEffect(() => {
     scheduleCollapse();
     return () => cancelCollapse();
@@ -48,14 +53,13 @@ export function FloatingMenu({
 
     const handlePointerDown = (event: PointerEvent) => {
       if (!wrapperRef.current?.contains(event.target as Node)) {
-        cancelCollapse();
-        setIsOpen(false);
+        collapseNow();
       }
     };
 
     document.addEventListener("pointerdown", handlePointerDown);
     return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, [isOpen, cancelCollapse]);
+  }, [isOpen, collapseNow]);
 
   // On devices with a mouse, collapse when the pointer leaves the viewport.
   useEffect(() => {
@@ -65,14 +69,13 @@ export function FloatingMenu({
     const handleMouseOut = (event: MouseEvent) => {
       // relatedTarget is null when the pointer leaves the browser window.
       if (event.relatedTarget === null) {
-        cancelCollapse();
-        setIsOpen(false);
+        collapseNow();
       }
     };
 
     document.addEventListener("mouseout", handleMouseOut);
     return () => document.removeEventListener("mouseout", handleMouseOut);
-  }, [isOpen, cancelCollapse]);
+  }, [isOpen, collapseNow]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -85,11 +88,11 @@ export function FloatingMenu({
         className={`${styles.menu} ${isOpen ? styles.visible : styles.hidden}`}
         aria-label="ページ内ナビゲーション"
         onMouseEnter={cancelCollapse}
-        onMouseLeave={scheduleCollapse}
+        onMouseLeave={collapseNow}
         onFocus={cancelCollapse}
         onBlur={(e) => {
           if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-            scheduleCollapse();
+            collapseNow();
           }
         }}
       >
