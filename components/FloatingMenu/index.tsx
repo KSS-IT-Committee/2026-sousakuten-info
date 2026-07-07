@@ -23,6 +23,7 @@ export function FloatingMenu({
 }: FloatingMenuProps) {
   const [isOpen, setIsOpen] = useState(true);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const scheduleCollapse = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -41,13 +42,45 @@ export function FloatingMenu({
     return () => cancelCollapse();
   }, [scheduleCollapse, cancelCollapse]);
 
+  // Collapse when a pointer press lands outside the menu.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!wrapperRef.current?.contains(event.target as Node)) {
+        cancelCollapse();
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [isOpen, cancelCollapse]);
+
+  // On devices with a mouse, collapse when the pointer leaves the viewport.
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!window.matchMedia("(hover: hover)").matches) return;
+
+    const handleMouseOut = (event: MouseEvent) => {
+      // relatedTarget is null when the pointer leaves the browser window.
+      if (event.relatedTarget === null) {
+        cancelCollapse();
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mouseout", handleMouseOut);
+    return () => document.removeEventListener("mouseout", handleMouseOut);
+  }, [isOpen, cancelCollapse]);
+
   const handleOpen = () => {
     setIsOpen(true);
     scheduleCollapse();
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div ref={wrapperRef} className={styles.wrapper}>
       <nav
         className={`${styles.menu} ${isOpen ? styles.visible : styles.hidden}`}
         aria-label="ページ内ナビゲーション"
