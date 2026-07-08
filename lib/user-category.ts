@@ -1,9 +1,22 @@
+export type Job = "student" | "teacher";
+
 const STUDENT_RE = /^[1-6][A-D]\d{2}/; // 1A01 … 6D40 (prefix match: a trailing suffix like 4D11_sakuten still counts — keep unanchored)
 const TEACHER_RE = /^k\d{7}$/; // staff accounts: k + 7 digits, e.g. k0959176
 
 export function isInternal(username: string): boolean {
-  return STUDENT_RE.test(username) || TEACHER_RE.test(username);
+  return isStudent(username) || isTeacher(username);
 }
+
+export function isStudent(username: string): boolean {
+  return STUDENT_RE.test(username);
+}
+
+export function isTeacher(username: string): boolean {
+  return TEACHER_RE.test(username);
+}
+
+export const ROLENAMES = ["IT", "Sousakuten", "Taiikusai"] as const;
+export type Role = (typeof ROLENAMES)[number];
 
 /**
  * The class code a username belongs to (e.g. "1A01" -> "1A"), or null for a

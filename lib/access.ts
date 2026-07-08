@@ -1,30 +1,52 @@
 import "server-only";
 
-import { ROLENAMES } from "@/db/schema";
 import { ClassName } from "@/lib/classes";
 import type { SessionUser } from "@/lib/session";
-import { classOf } from "@/lib/user-category";
+import { classOf, isStudent, isTeacher, Job, Role } from "@/lib/user-category";
 
-export type Role = (typeof ROLENAMES)[number];
+export type Filter = { canManage: true };
 
-export function hasAccess(
+export function hasAccess(user: SessionUser, filter: Filter): boolean {
+  if (filter.canManage === true) {
+    return checkCondition(user, { job: "teacher", role: ["Sousakuten", "IT"] });
+  }
+  return false;
+}
+
+function checkCondition(
   user: SessionUser,
-  role: Role | Role[] | undefined,
-  classCode: ClassName | ClassName[] | undefined,
+  {
+    job,
+    role,
+    classCode,
+  }: {
+    job?: Job;
+    role?: Role | Role[];
+    classCode?: ClassName | ClassName[];
+  },
 ): boolean {
-  if (classCode !== undefined) {
-    const allowed: string[] = Array.isArray(classCode)
-      ? classCode
-      : [classCode];
-    const userClass = classOf(user.username);
-    if (userClass !== null && allowed.includes(userClass)) {
-      return true;
-    }
+  const username = user.username;
+
+  if (
+    (job === "student" && isStudent(username)) ||
+    (job === "teacher" && isTeacher(username))
+  ) {
+    return true;
   }
 
   if (role !== undefined) {
     const required = Array.isArray(role) ? role : [role];
     if (required.some((r) => user.roles.includes(r))) {
+      return true;
+    }
+  }
+
+  if (classCode !== undefined) {
+    const allowed: string[] = Array.isArray(classCode)
+      ? classCode
+      : [classCode];
+    const userClass = classOf(username);
+    if (userClass !== null && allowed.includes(userClass)) {
       return true;
     }
   }
