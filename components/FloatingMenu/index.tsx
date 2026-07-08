@@ -21,7 +21,7 @@ export function FloatingMenu({
   items,
   collapseDelayMs = DEFAULT_COLLAPSE_DELAY_MS,
 }: FloatingMenuProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
