@@ -205,12 +205,6 @@ export async function validateSessionToken(
   return validateSessionTokenViaDb(token);
 }
 
-/**
- * The logged-in user for the current request, or null. Reads the session
- * cookie, so any page using it renders dynamically. Renews the session's
- * expiry as a side effect (see validateSessionToken). Deduplicated per
- * request via React cache().
- */
 export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
   if (process.env.LOCAL_DEV_USER && process.env.NODE_ENV === "development") {
     return {
