@@ -85,6 +85,8 @@ export function FloatingMenu({
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
       <nav
+        id="floating-menu-nav"
+        aria-hidden={!isOpen}
         className={`${styles.menu} ${isOpen ? styles.visible : styles.hidden}`}
         aria-label="ページ内ナビゲーション"
         onMouseEnter={cancelCollapse}
@@ -109,6 +111,8 @@ export function FloatingMenu({
       </nav>
 
       <button
+        aria-expanded={isOpen}
+        aria-controls="floating-menu-nav"
         type="button"
         className={`${styles.hamburger} ${
           isOpen ? styles.hidden : styles.visible
