@@ -1,4 +1,5 @@
 import { hasAccess, type Role } from "@/lib/access";
+import { ClassName } from "@/lib/classes";
 import { getCurrentUser } from "@/lib/session";
 import { isInternal } from "@/lib/user-category";
 
@@ -9,7 +10,7 @@ export async function Internal({
 }: {
   children: React.ReactNode;
   role?: Role | Role[];
-  classCode?: string | string[];
+  classCode?: ClassName | ClassName[];
 }) {
   const user = await getCurrentUser();
   if (!user || !isInternal(user.username)) {
