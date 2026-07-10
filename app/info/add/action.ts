@@ -1,8 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
 import { isClassName } from "@/lib/classes";
-import { revalidatePath } from "next/cache";
 
 export async function addAnnouncementAction({
   title,
