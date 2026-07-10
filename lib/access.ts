@@ -4,11 +4,20 @@ import { ClassName } from "@/lib/classes";
 import type { SessionUser } from "@/lib/session";
 import { classOf, isStudent, isTeacher, Job, Role } from "@/lib/user-category";
 
-export type Filter = { canManage: true };
+export type Filter = { canManage?: true; className?: ClassName[] };
 
 export function hasAccess(user: SessionUser, filter: Filter): boolean {
-  if (filter.canManage === true) {
-    return checkCondition(user, { job: "teacher", role: ["Sousakuten", "IT"] });
+  if (
+    filter.canManage === true &&
+    checkCondition(user, { job: "teacher", role: ["Sousakuten", "IT"] })
+  ) {
+    return true;
+  }
+  if (
+    filter.className !== undefined &&
+    checkCondition(user, { classCode: filter.className })
+  ) {
+    return true;
   }
   return false;
 }
