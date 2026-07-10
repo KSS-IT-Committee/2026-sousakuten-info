@@ -40,7 +40,7 @@ export default function AddInfoClient() {
 
     setLoading(true);
     try {
-      addAnnouncementAction({
+      await addAnnouncementAction({
         title: titleText,
         body: bodyContent,
         classes: classes,

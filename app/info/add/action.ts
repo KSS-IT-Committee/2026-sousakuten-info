@@ -3,13 +3,25 @@
 import { revalidatePath } from "next/cache";
 
 import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
+import { hasAccess } from "@/lib/access";
 import { isClassName } from "@/lib/classes";
+import { getCurrentUser } from "@/lib/session";
+import { isInternal } from "@/lib/user-category";
 
 export async function addAnnouncementAction({
   title,
   body,
   classes: classes_list,
 }: AddAnnouncementProps) {
+  const user = await getCurrentUser();
+  if (
+    !user ||
+    !isInternal(user.username) ||
+    !hasAccess(user, { canManage: true })
+  ) {
+    throw new Error("Invalid user");
+  }
+
   if (
     typeof title !== "string" ||
     title.length === 0 ||
