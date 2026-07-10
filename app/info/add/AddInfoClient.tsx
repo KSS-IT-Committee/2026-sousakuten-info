@@ -19,8 +19,8 @@ export default function AddInfoClient() {
   const [classes, setClasses] = useState<ClassName[]>([]);
   const title = useRef<HTMLInputElement>(null);
   const body = useRef<HTMLTextAreaElement>(null);
-  const title_max_length = Number(30);
-  const contents_max_length = Number(150);
+  const title_max_length: number = 30;
+  const contents_max_length: number = 300;
 
   const addAnnouncement = async () => {
     const titleText = title?.current?.value;
