@@ -47,10 +47,10 @@ export default async function InfoPage({ params, searchParams }: Props) {
       <p className={styles.content}>
         <MultiLine body={info.body} />
       </p>
-      <hr className={styles.hr} />
-      <h2 className={shared.subtitle}>対象クラス</h2>
-      <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
       <Internal filter={{ canManage: true }}>
+        <hr className={styles.hr} />
+        <h2 className={shared.subtitle}>対象クラス</h2>
+        <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
         <DeleteAnnouncementButton id={id} />
       </Internal>
     </AuthGuard>
