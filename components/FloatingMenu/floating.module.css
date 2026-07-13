@@ -52,8 +52,11 @@
   border-radius: 12px;
 }
 
+/* Colors are self-contained (hardcoded light/dark) so this file can be
+   copied byte-identical across the app repos regardless of each app's
+   CSS variable vocabulary — same convention as AccountNav.module.css. */
 .link {
-  color: var(--foreground);
+  color: #333;
   text-decoration: none;
   padding: 0.4rem 0.75rem;
   border-radius: 6px;
@@ -79,7 +82,7 @@
   padding: 0.6rem 1.1rem;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--foreground);
+  color: #333;
   border-radius: 9999px;
   cursor: pointer;
 }
@@ -109,6 +112,11 @@
   .hamburger {
     background: rgba(17, 17, 17, 0.8);
     border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .link,
+  .hamburger {
+    color: #ddd;
   }
 
   .link:hover {
