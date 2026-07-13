@@ -1,0 +1,25 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px;
+  /* Kept light in both color schemes: the logo artwork is dark blue on
+     white, same as the pre-floating-menu header. */
+  background: var(--gray-f);
+  border-bottom: 1px solid var(--gray-e);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.home {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
