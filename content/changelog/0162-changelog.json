@@ -1,0 +1,5 @@
+{
+  "title": "hasAccess関数の引数classCodeの型を修正",
+  "description": "classCodeの型がstringからClassNameになりました。",
+  "credits": ["@hatuna-827"]
+}
