@@ -1,6 +1,8 @@
+import { AuthGuard } from "@/components/AuthGuard";
 import { List } from "@/components/List";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
+import { MANAGE_ROLES } from "@/lib/authorize";
 import { classFormat } from "@/lib/class-format";
 
 import shared from "../shared.module.css";
@@ -19,7 +21,7 @@ export default async function Info() {
     return { id: i, param: id, date, title, subtext: formattedClasses };
   });
   return (
-    <>
+    <AuthGuard role={MANAGE_ROLES}>
       <h1 className={shared.title}>お知らせ一覧</h1>
       <List
         items={items}
@@ -27,6 +29,6 @@ export default async function Info() {
         link="/info/"
         query="?from=/info"
       />
-    </>
+    </AuthGuard>
   );
 }

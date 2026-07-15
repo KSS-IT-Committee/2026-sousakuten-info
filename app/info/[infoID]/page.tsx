@@ -1,11 +1,16 @@
-import { notFound } from "next/navigation";
+import { forbidden, notFound, unauthorized } from "next/navigation";
 
 import { BackLink } from "@/components/BackLink";
+import { Internal } from "@/components/Internal";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
+import { hasAnyRole, INTERNAL_ROLES } from "@/lib/access";
+import { MANAGE_ROLES } from "@/lib/authorize";
 import { classFormat } from "@/lib/class-format";
 import { dateFormat } from "@/lib/date-format";
+import { getCurrentUser } from "@/lib/session";
+import { classOf } from "@/lib/user-category";
 
 import shared from "../../shared.module.css";
 import { DeleteAnnouncementButton } from "./DeleteAnnouncementButton";
@@ -21,6 +26,14 @@ type Props = {
 };
 
 export default async function InfoPage({ params, searchParams }: Props) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    unauthorized();
+  }
+  const canManage = hasAnyRole(user, MANAGE_ROLES);
+  if (!canManage && !hasAnyRole(user, INTERNAL_ROLES)) {
+    forbidden();
+  }
   const { infoID } = await params;
   const { from } = await searchParams;
   const id = Number(infoID);
@@ -34,6 +47,16 @@ export default async function InfoPage({ params, searchParams }: Props) {
   if (info === undefined) {
     return notFound();
   }
+  // Non-managers may only open announcements that target their own class —
+  // classOf here is read-scoping (which rows the viewer sees), the access
+  // decision itself was made by the role checks above.
+  if (!canManage) {
+    const viewerClass = classOf(user.username);
+    const targets: readonly string[] = classes;
+    if (viewerClass === null || !targets.includes(viewerClass)) {
+      forbidden();
+    }
+  }
   const parentHref = from === "/info" ? "/info" : "/";
   return (
     <>
@@ -45,10 +68,12 @@ export default async function InfoPage({ params, searchParams }: Props) {
       <p className={styles.content}>
         <MultiLine body={info.body} />
       </p>
-      <hr className={styles.hr} />
-      <h2 className={shared.subtitle}>対象クラス</h2>
-      <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
-      <DeleteAnnouncementButton id={id} />
+      <Internal role={MANAGE_ROLES}>
+        <hr className={styles.hr} />
+        <h2 className={shared.subtitle}>対象クラス</h2>
+        <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
+        <DeleteAnnouncementButton id={id} />
+      </Internal>
     </>
   );
 }

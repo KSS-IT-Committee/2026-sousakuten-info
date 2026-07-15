@@ -37,6 +37,7 @@ export function Header({ accountSlot }: HeaderProps) {
               alt="創作展"
               height={420}
               width={930}
+              loading="eager"
             />
           </a>
           {accountSlot ? (
