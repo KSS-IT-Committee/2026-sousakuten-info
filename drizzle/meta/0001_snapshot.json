@@ -1,6 +1,6 @@
 {
-  "id": "2e604007-d906-4cfe-a34e-09db668cfd6d",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "c62c1862-e278-4e20-aaa3-7f8179300915",
+  "prevId": "2e604007-d906-4cfe-a34e-09db668cfd6d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -22,7 +22,8 @@
         },
         "class_name": {
           "name": "class_name",
-          "type": "text",
+          "type": "class_name",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         }
@@ -101,7 +102,8 @@
         },
         "class_name": {
           "name": "class_name",
-          "type": "text",
+          "type": "class_name",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -134,7 +136,38 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.class_name": {
+      "name": "class_name",
+      "schema": "public",
+      "values": [
+        "1A",
+        "1B",
+        "1C",
+        "1D",
+        "2A",
+        "2B",
+        "2C",
+        "2D",
+        "3A",
+        "3B",
+        "3C",
+        "3D",
+        "4A",
+        "4B",
+        "4C",
+        "4D",
+        "5A",
+        "5B",
+        "5C",
+        "5D",
+        "6A",
+        "6B",
+        "6C",
+        "6D"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},

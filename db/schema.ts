@@ -14,7 +14,6 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { CLASSNAMES } from "@/lib/classes";
-import { ROLENAMES } from "@/lib/user-category";
 
 export const classEnum = pgEnum("class_name", CLASSNAMES);
 
@@ -112,6 +111,7 @@ export type NewAnnouncementClass = typeof announcementClasses.$inferInsert;
 
 /* ───────────────────────── shared login ───────────────────────── */
 
+export const ROLENAMES = ["IT", "Sousakuten", "Taiikusai"] as const;
 export const roleEnum = pgEnum("role", ROLENAMES);
 
 // Login credentials, loaded out-of-band from 2026-account-generator's

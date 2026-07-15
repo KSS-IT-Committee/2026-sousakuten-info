@@ -1,4 +1,3 @@
-import { AuthGuard } from "@/components/AuthGuard";
 import { List } from "@/components/List";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
@@ -20,7 +19,7 @@ export default async function Info() {
     return { id: i, param: id, date, title, subtext: formattedClasses };
   });
   return (
-    <AuthGuard filter={{ canManage: true }}>
+    <>
       <h1 className={shared.title}>お知らせ一覧</h1>
       <List
         items={items}
@@ -28,6 +27,6 @@ export default async function Info() {
         link="/info/"
         query="?from=/info"
       />
-    </AuthGuard>
+    </>
   );
 }

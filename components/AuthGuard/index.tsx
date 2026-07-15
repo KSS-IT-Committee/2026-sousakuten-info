@@ -1,28 +1,35 @@
 import { forbidden, unauthorized } from "next/navigation";
 
-import { Filter, hasAccess } from "@/lib/access";
+import { hasAccess, type Role } from "@/lib/access";
 import { getCurrentUser } from "@/lib/session";
 import { isInternal } from "@/lib/user-category";
 
 export async function AuthGuard({
   children,
-  filter,
+  role,
+  classCode,
 }: {
   children: React.ReactNode;
-  filter?: Filter;
+  role?: Role | Role[];
+  classCode?: string | string[];
 }) {
   const user = await getCurrentUser();
   if (!user) {
     unauthorized(); // 401 — not logged in
   }
 
-  if (!isInternal(user.username)) {
-    forbidden(); // 403
+  // No role/class requested: gate on being an internal (school) user.
+  if (role === undefined && classCode === undefined) {
+    if (!isInternal(user.username)) {
+      forbidden(); // 403
+    }
+    return <>{children}</>;
   }
 
-  if (filter === undefined || hasAccess(user, filter)) {
-    return <>{children}</>;
-  } else {
+  // A constraint was requested: admit the user if they match any of them
+  // (role OR class). Nest guards when ALL must hold.
+  if (!hasAccess(user, role, classCode)) {
     forbidden(); // 403
   }
+  return <>{children}</>;
 }
