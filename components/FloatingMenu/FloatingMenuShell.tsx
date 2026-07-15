@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./floating.module.css";
@@ -30,6 +31,8 @@ type FloatingMenuShellProps = {
  */
 export function FloatingMenuShell({ children }: FloatingMenuShellProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [atBottom, setAtBottom] = useState(false);
+  const pathname = usePathname();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -47,10 +50,29 @@ export function FloatingMenuShell({ children }: FloatingMenuShellProps) {
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [isOpen]);
 
+  useEffect(() => {
+    const update = () => {
+      const { scrollHeight } = document.documentElement;
+      const { innerHeight, scrollY } = window;
+
+      setAtBottom(
+        scrollHeight <= innerHeight ||
+          innerHeight + scrollY >= scrollHeight - 50,
+      );
+    };
+    requestAnimationFrame(update);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [pathname]);
+
   return (
     <div
       ref={wrapperRef}
-      className={styles.wrapper}
+      className={`${styles.wrapper}`}
       // Enter/leave on the wrapper covers the button and the nav as one
       // hover region, so the menu can't get stuck open when the pointer
       // skims the button without ever reaching the nav.
@@ -77,7 +99,7 @@ export function FloatingMenuShell({ children }: FloatingMenuShellProps) {
         type="button"
         className={`${styles.hamburger} ${
           isOpen ? styles.hidden : styles.visible
-        }`}
+        } ${atBottom && !isOpen ? styles.atBottom : ""}`}
         tabIndex={isOpen ? -1 : 0}
         onClick={() => setIsOpen(true)}
       >
