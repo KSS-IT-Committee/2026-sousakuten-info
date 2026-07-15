@@ -29,7 +29,7 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
-    command: sh -c "npm ci && npx drizzle-kit migrate && npm run dev"
+    command: sh -c "npm install && npx drizzle-kit migrate && npm run dev"
 
 volumes:
   postgres_data:
