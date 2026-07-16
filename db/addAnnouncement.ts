@@ -17,10 +17,10 @@ export async function addAnnouncement({
 }: AddAnnouncementProps) {
   if (
     typeof title !== "string" ||
-    title.length === 0 ||
+    title.trim().length === 0 ||
     TITLE_MAX_LENGTH < title.length ||
     typeof body !== "string" ||
-    body.length === 0 ||
+    body.trim().length === 0 ||
     CONTENTS_MAX_LENGTH < body.length ||
     !Array.isArray(classes_list) ||
     classes_list.length === 0

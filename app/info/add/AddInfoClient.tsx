@@ -26,7 +26,7 @@ export function AddInfoClient() {
     const bodyContent = body?.current?.value;
     if (
       typeof titleText !== "string" ||
-      titleText.length === 0 ||
+      titleText.trim().length === 0 ||
       TITLE_MAX_LENGTH < titleText.length
     ) {
       alert(`タイトルを入力してください(最大文字数:${TITLE_MAX_LENGTH})`);
@@ -34,7 +34,7 @@ export function AddInfoClient() {
     }
     if (
       typeof bodyContent !== "string" ||
-      bodyContent.length === 0 ||
+      bodyContent.trim().length === 0 ||
       CONTENTS_MAX_LENGTH < bodyContent.length
     ) {
       alert(`内容を入力してください(最大文字数:${CONTENTS_MAX_LENGTH})`);
