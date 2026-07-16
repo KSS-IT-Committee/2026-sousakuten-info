@@ -18,16 +18,16 @@ export function SelectClass() {
 
   const paramClassName = searchParams.get(paramKey) ?? "";
 
-  const [grade, setGrade] = useState<Grade>(() => {
-    if (isClassName(paramClassName)) return paramClassName.slice(0, 1) as Grade;
-    if (typeof window === "undefined") return "1";
-    return storageClassName.slice(0, 1) as Grade;
-  });
-  const [className, setClassName] = useState<Class>(() => {
-    if (isClassName(paramClassName)) return paramClassName.slice(1, 2) as Class;
-    if (typeof window === "undefined") return "A";
-    return storageClassName.slice(1, 2) as Class;
-  });
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const activeClassName: ClassName = isClassName(paramClassName)
+    ? (paramClassName as ClassName)
+    : storageClassName;
+  const grade = activeClassName.slice(0, 1) as Grade;
+  const classLetter = activeClassName.slice(1, 2) as Class;
 
   const grades = ["1", "2", "3", "4", "5", "6"].map((g) => ({
     value: g,
@@ -39,21 +39,14 @@ export function SelectClass() {
   }));
 
   useEffect(() => {
-    const nextClassName = `${grade}${className}`;
-    if (storageClassName !== nextClassName) {
-      localStorage.setItem(storageKey, `${nextClassName}`);
+    if (!isMounted) return;
+    if (storageClassName !== activeClassName) {
+      localStorage.setItem(storageKey, activeClassName);
     }
-    if (paramClassName !== nextClassName) {
-      router.push(`?${paramKey}=${nextClassName}`);
+    if (paramClassName !== activeClassName) {
+      router.push(`?${paramKey}=${activeClassName}`);
     }
-  }, [
-    router,
-    searchParams,
-    paramClassName,
-    storageClassName,
-    grade,
-    className,
-  ]);
+  }, [isMounted, activeClassName, paramClassName, storageClassName, router]);
 
   return (
     <>
@@ -62,15 +55,15 @@ export function SelectClass() {
         options={grades}
         value={grade}
         onChange={(value) => {
-          setGrade(value as Grade);
+          router.push(`?${paramKey}=${value}${classLetter}`);
         }}
       />
       <Select
         label="クラス: "
         options={classes}
-        value={className}
+        value={classLetter}
         onChange={(value) => {
-          setClassName(value as Class);
+          router.push(`?${paramKey}=${grade}${value}`);
         }}
       />
     </>

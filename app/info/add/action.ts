@@ -2,7 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
+import {
+  addAnnouncement,
+  AddAnnouncementProps,
+  CONTENTS_MAX_LENGTH,
+  TITLE_MAX_LENGTH,
+} from "@/db/addAnnouncement";
 import { requireManager } from "@/lib/authorize";
 import { isClassName } from "@/lib/classes";
 
@@ -16,8 +21,10 @@ export async function addAnnouncementAction({
   if (
     typeof title !== "string" ||
     title.length === 0 ||
+    TITLE_MAX_LENGTH < title.length ||
     typeof body !== "string" ||
     body.length === 0 ||
+    CONTENTS_MAX_LENGTH < body.length ||
     !Array.isArray(classes_list) ||
     classes_list.length === 0
   ) {

@@ -9,6 +9,9 @@ export type AddAnnouncementProps = {
   classes: ClassName[];
 };
 
+export const TITLE_MAX_LENGTH: number = 30;
+export const CONTENTS_MAX_LENGTH: number = 300;
+
 export async function addAnnouncement({
   title,
   body,
@@ -17,8 +20,10 @@ export async function addAnnouncement({
   if (
     typeof title !== "string" ||
     title.length === 0 ||
+    TITLE_MAX_LENGTH < title.length ||
     typeof body !== "string" ||
     body.length === 0 ||
+    CONTENTS_MAX_LENGTH < body.length ||
     !Array.isArray(classes_list) ||
     classes_list.length === 0
   ) {

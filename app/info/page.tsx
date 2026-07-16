@@ -7,6 +7,14 @@ import { classFormat } from "@/lib/class-format";
 import shared from "../shared.module.css";
 
 export default async function Info() {
+  return (
+    <AuthGuard filter={{ canReadAll: true }}>
+      <InfoContent />
+    </AuthGuard>
+  );
+}
+
+async function InfoContent() {
   const [announcements, classes] = await Promise.all([
     getAllAnnouncements(),
     getAllAnnouncementClasses(),
@@ -20,7 +28,7 @@ export default async function Info() {
     return { id: i, param: id, date, title, subtext: formattedClasses };
   });
   return (
-    <AuthGuard filter={{ canReadAll: true }}>
+    <>
       <h1 className={shared.title}>お知らせ一覧</h1>
       <List
         items={items}
@@ -28,6 +36,6 @@ export default async function Info() {
         link="/info/"
         query="?from=/info"
       />
-    </AuthGuard>
+    </>
   );
 }
