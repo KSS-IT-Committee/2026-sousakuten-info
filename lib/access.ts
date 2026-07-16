@@ -1,34 +1,60 @@
 import "server-only";
 
-import { ROLENAMES } from "@/db/schema";
+import { ClassName } from "@/lib/classes";
 import type { SessionUser } from "@/lib/session";
+import { classOf, Role } from "@/lib/user-category";
 
-export type Role = (typeof ROLENAMES)[number];
+export type Filter = {
+  isInternal?: true;
+  canManage?: true;
+  canReadAll?: true;
+  role?: Role | Role[];
+  className?: ClassName | ClassName[];
+};
 
-/**
- * The roles that mark a logged-in account as a school-internal user. Every
- * roster account carries one of them via 2026-account-generator's users.sql
- * (students get "Students", staff accounts get "Teachers"), so a guard that
- * means "any logged-in school account" says `role={INTERNAL_ROLES}`
- * explicitly instead of matching username shapes.
- */
-export const INTERNAL_ROLES: readonly Role[] = ["Students", "Teachers"];
+export function hasAccess(user: SessionUser, filter: Filter): boolean {
+  if (
+    (filter.isInternal === true &&
+      checkCondition(user, { role: ["Students", "Teachers"] })) ||
+    (filter.canManage === true &&
+      checkCondition(user, { role: ["Sousakuten", "IT"] })) ||
+    (filter.canReadAll === true &&
+      checkCondition(user, { role: ["Teachers", "Sousakuten", "IT"] })) ||
+    (filter.role !== undefined &&
+      checkCondition(user, { role: filter.role })) ||
+    (filter.className !== undefined &&
+      checkCondition(user, { className: filter.className }))
+  ) {
+    return true;
+  }
 
-/**
- * Whether `user` holds at least one of the given roles. This is the only
- * authorization primitive — access is decided by the shared `users.roles`
- * column, never by the shape of the username.
- *
- * Roles come off the session object (lib/session.ts fills them from the DB
- * in production and from the auth host on PR previews), so this check is
- * pure and does no DB access — it works on previews, whose local `users`
- * table is empty. When ALL of several roles must hold, chain calls (or nest
- * guards) instead of widening the list.
- */
-export function hasAnyRole(
+  return false;
+}
+
+export function checkCondition(
   user: SessionUser,
-  roles: Role | readonly Role[],
-): boolean {
-  const allowed: readonly Role[] = typeof roles === "string" ? [roles] : roles;
-  return allowed.some((role) => user.roles.includes(role));
+  {
+    role,
+    className,
+  }: {
+    role?: Role | Role[];
+    className?: ClassName | ClassName[];
+  },
+) {
+  if (role !== undefined) {
+    const allowed = Array.isArray(role) ? role : [role];
+    if (allowed.some((r) => user.roles.includes(r))) {
+      return true;
+    }
+  }
+
+  if (className !== undefined) {
+    const allowed = Array.isArray(className) ? className : [className];
+    const userClass = classOf(user.username);
+    if (userClass !== null && allowed.includes(userClass)) {
+      return true;
+    }
+  }
+
+  return false;
 }

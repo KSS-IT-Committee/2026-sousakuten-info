@@ -1,26 +1,17 @@
-import { hasAnyRole, type Role } from "@/lib/access";
+import { Filter, hasAccess } from "@/lib/access";
 import { getCurrentUser } from "@/lib/session";
 
-/**
- * Renders children only for a logged-in user who holds at least one of the
- * roles in `role`; everyone else gets nothing — the fragment leaves no trace
- * in the HTML.
- *
- * Deny-by-default: with no `role` prop it renders nothing for anybody.
- * Callers must state which roles may see the fragment —
- * `role={INTERNAL_ROLES}` for "any logged-in school account". Username
- * shapes are never consulted.
- */
 export async function Internal({
   children,
-  role,
+  filter,
 }: {
   children: React.ReactNode;
-  role?: Role | readonly Role[];
+  filter?: Filter;
 }) {
   const user = await getCurrentUser();
-  if (!user || role === undefined || !hasAnyRole(user, role)) {
+  if (user !== null && (filter === undefined || hasAccess(user, filter))) {
+    return children;
+  } else {
     return null;
   }
-  return <>{children}</>;
 }

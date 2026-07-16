@@ -1,5 +1,5 @@
 CREATE TYPE "public"."class_name" AS ENUM('1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '4A', '4B', '4C', '4D', '5A', '5B', '5C', '5D', '6A', '6B', '6C', '6D');--> statement-breakpoint
-CREATE TYPE "public"."role" AS ENUM('IT', 'Sousakuten', 'Taiikusai', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ClassA', 'ClassB', 'ClassC', 'ClassD', 'Students', 'Teachers');--> statement-breakpoint
+CREATE TYPE "public"."role" AS ENUM('IT', 'Sousakuten', 'Taiikusai');--> statement-breakpoint
 CREATE TABLE "borrowings" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"equipment_id" integer NOT NULL,

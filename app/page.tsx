@@ -5,8 +5,7 @@ import { Internal } from "@/components/Internal";
 import { List } from "@/components/List";
 import { getAnnouncements } from "@/db/getAnnouncements";
 import { getDeductions } from "@/db/getDeductions";
-import { hasAnyRole, INTERNAL_ROLES } from "@/lib/access";
-import { MANAGE_ROLES } from "@/lib/authorize";
+import { hasAccess } from "@/lib/access";
 import { ClassName, isClassName } from "@/lib/classes";
 import { getCurrentUser } from "@/lib/session";
 import { classOf } from "@/lib/user-category";
@@ -29,7 +28,7 @@ export default async function Home({ searchParams }: Props) {
   }
   const userClass = classOf(user.username) ?? "";
   className = isClassName(userClass) ? (userClass as ClassName) : "1A";
-  if (hasAnyRole(user, MANAGE_ROLES)) {
+  if (hasAccess(user, { canReadAll: true })) {
     const { className: paramClass = "" } = await searchParams;
     className = isClassName(paramClass) ? (paramClass as ClassName) : className;
   }
@@ -54,9 +53,9 @@ export default async function Home({ searchParams }: Props) {
   }));
 
   return (
-    <AuthGuard role={INTERNAL_ROLES}>
+    <AuthGuard filter={{ isInternal: true }}>
       <h1 className={shared.title}>情報伝達ページ</h1>
-      <Internal role={MANAGE_ROLES}>
+      <Internal filter={{ canReadAll: true }}>
         <SelectClass />
       </Internal>
       <h2 className={shared.subtitle}>お知らせ</h2>
