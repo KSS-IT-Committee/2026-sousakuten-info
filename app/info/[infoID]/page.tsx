@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
-import { AuthGuard } from "@/components/AuthGuard";
 import { BackLink } from "@/components/BackLink";
-import { Internal } from "@/components/Internal";
+import { FilterGuard } from "@/components/FilterGuard";
+import { FilterInternal } from "@/components/FilterInternal";
 import { MultiLine } from "@/components/MultiLine";
 import { getAnnouncementClasses } from "@/db/getAnnouncementClasses";
 import { getInfo } from "@/db/getInfo";
@@ -38,7 +38,7 @@ export default async function InfoPage({ params, searchParams }: Props) {
   }
   const parentHref = from === "/info" ? "/info" : "/";
   return (
-    <AuthGuard filter={{ canReadAll: true, className: classes }}>
+    <FilterGuard filter={{ canReadAll: true, className: classes }}>
       <div className={shared.titleRow}>
         <BackLink href={parentHref} />
         <h1 className={shared.title}>{`#${id} ${info.title}`}</h1>
@@ -47,14 +47,14 @@ export default async function InfoPage({ params, searchParams }: Props) {
       <p className={styles.content}>
         <MultiLine body={info.body} />
       </p>
-      <Internal filter={{ canReadAll: true }}>
+      <FilterInternal filter={{ canReadAll: true }}>
         <hr className={styles.hr} />
         <h2 className={shared.subtitle}>対象クラス</h2>
         <div className={styles.classes}>{classFormat(classes).join(", ")}</div>
-      </Internal>
-      <Internal filter={{ canManage: true }}>
+      </FilterInternal>
+      <FilterInternal filter={{ canManage: true }}>
         <DeleteAnnouncementButton id={id} />
-      </Internal>
-    </AuthGuard>
+      </FilterInternal>
+    </FilterGuard>
   );
 }

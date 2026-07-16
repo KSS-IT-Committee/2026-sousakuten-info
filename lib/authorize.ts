@@ -1,6 +1,6 @@
 import "server-only";
 
-import { hasAccess } from "@/lib/access";
+import { hasAccess } from "@/lib/access-filter";
 import { getCurrentUser } from "@/lib/session";
 
 export async function isManager(): Promise<boolean> {

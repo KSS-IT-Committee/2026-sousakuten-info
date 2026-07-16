@@ -1,11 +1,11 @@
 import { unauthorized } from "next/navigation";
 
-import { AuthGuard } from "@/components/AuthGuard";
-import { Internal } from "@/components/Internal";
+import { FilterGuard } from "@/components/FilterGuard";
+import { FilterInternal } from "@/components/FilterInternal";
 import { List } from "@/components/List";
 import { getAnnouncements } from "@/db/getAnnouncements";
 import { getDeductions } from "@/db/getDeductions";
-import { hasAccess } from "@/lib/access";
+import { hasAccess } from "@/lib/access-filter";
 import { ClassName, isClassName } from "@/lib/classes";
 import { getCurrentUser } from "@/lib/session";
 import { classOf } from "@/lib/user-category";
@@ -53,11 +53,11 @@ export default async function Home({ searchParams }: Props) {
   }));
 
   return (
-    <AuthGuard filter={{ isInternal: true }}>
+    <FilterGuard filter={{ isInternal: true }}>
       <h1 className={shared.title}>情報伝達ページ</h1>
-      <Internal filter={{ canReadAll: true }}>
+      <FilterInternal filter={{ canReadAll: true }}>
         <SelectClass />
-      </Internal>
+      </FilterInternal>
       <h2 className={shared.subtitle}>お知らせ</h2>
       <List
         items={announcementItems}
@@ -67,6 +67,6 @@ export default async function Home({ searchParams }: Props) {
       />
       <h2 className={shared.subtitle}>減点状況</h2>
       <List items={deductionItems} emptyMessage="減点はありません" />
-    </AuthGuard>
+    </FilterGuard>
   );
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Internal } from "@/components/Internal";
-import { Filter } from "@/lib/access";
+import { FilterInternal } from "@/components/FilterInternal";
+import { Filter } from "@/lib/access-filter";
 
 import styles from "./floating.module.css";
 import { FloatingMenuShell } from "./FloatingMenuShell";
@@ -20,9 +20,12 @@ export function FloatingMenu({ items }: FloatingMenuProps) {
   return (
     <FloatingMenuShell>
       {items.map((item) => (
-        <Internal key={item.href} filter={item.filter ?? { isInternal: true }}>
+        <FilterInternal
+          key={item.href}
+          filter={item.filter ?? { isInternal: true }}
+        >
           <FloatingMenuLink item={item} />
-        </Internal>
+        </FilterInternal>
       ))}
     </FloatingMenuShell>
   );

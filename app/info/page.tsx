@@ -1,4 +1,4 @@
-import { AuthGuard } from "@/components/AuthGuard";
+import { FilterGuard } from "@/components/FilterGuard";
 import { List } from "@/components/List";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
@@ -8,9 +8,9 @@ import shared from "../shared.module.css";
 
 export default async function Info() {
   return (
-    <AuthGuard filter={{ canReadAll: true }}>
+    <FilterGuard filter={{ canReadAll: true }}>
       <InfoContent />
-    </AuthGuard>
+    </FilterGuard>
   );
 }
 

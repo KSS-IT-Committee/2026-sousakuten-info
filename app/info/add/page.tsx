@@ -1,11 +1,11 @@
-import { AuthGuard } from "@/components/AuthGuard";
+import { FilterGuard } from "@/components/FilterGuard";
 
 import { AddInfoClient } from "./AddInfoClient";
 
 export default function AddInfo() {
   return (
-    <AuthGuard filter={{ canManage: true }}>
+    <FilterGuard filter={{ canManage: true }}>
       <AddInfoClient />
-    </AuthGuard>
+    </FilterGuard>
   );
 }
