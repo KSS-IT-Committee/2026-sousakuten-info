@@ -9,9 +9,8 @@ export async function Internal({
   filter?: Filter;
 }) {
   const user = await getCurrentUser();
-  if (user !== null && (filter === undefined || hasAccess(user, filter))) {
-    return children;
-  } else {
+  if (user === null || filter === undefined || !hasAccess(user, filter)) {
     return null;
   }
+  return children;
 }

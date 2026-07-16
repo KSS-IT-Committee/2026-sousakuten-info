@@ -14,9 +14,8 @@ export async function AuthGuard({
   if (user === null) {
     unauthorized(); // 401
   }
-  if (filter === undefined || hasAccess(user, filter)) {
-    return children;
-  } else {
-    forbidden(); // 403
+  if (filter === undefined || !hasAccess(user, filter)) {
+    forbidden(); // 403 — no filter requested, or the filter is not satisfied
   }
+  return children;
 }
