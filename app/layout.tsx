@@ -3,7 +3,7 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 
-import { AccountNav } from "@/components/AccountNav";
+import { FloatingMenu } from "@/components/FloatingMenu";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { NoScriptAlert } from "@/components/NoScriptAlert";
@@ -37,9 +37,19 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <NoScriptAlert />
-        <Header accountSlot={<AccountNav />} />
+        <Header />
         <main>{children}</main>
         <Footer />
+        {/* One menu for the whole site, rendered from the layout so every
+            page shows the same entries — including the current page's own. */}
+        <FloatingMenu
+          items={[
+            { label: "クラスページ", href: "/" },
+            { label: "お知らせを管理", href: "/info" },
+            { label: "お知らせを追加", href: "/info/add" },
+            { label: "ページ改善の提案", href: "/requests" },
+          ]}
+        />
       </body>
       {/* Google tag (gtag.js) via @next/third-parties — the official Next.js
           integration. Skipped on PR preview deployments: IS_PR_PREVIEW is

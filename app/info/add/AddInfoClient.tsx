@@ -13,7 +13,7 @@ import shared from "../../shared.module.css";
 import { addAnnouncementAction } from "./action";
 import styles from "./add-info.module.css";
 
-export default function AddInfoClient() {
+export function AddInfoClient() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [classes, setClasses] = useState<ClassName[]>([]);
