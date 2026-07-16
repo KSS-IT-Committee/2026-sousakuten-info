@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Select } from "@/components/Select";
 import { Class, ClassName, Grade, isClassName } from "@/lib/classes";
@@ -18,11 +18,6 @@ export function SelectClass() {
 
   const paramClassName = searchParams.get(paramKey) ?? "";
 
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const activeClassName: ClassName = isClassName(paramClassName)
     ? (paramClassName as ClassName)
     : storageClassName;
@@ -39,14 +34,13 @@ export function SelectClass() {
   }));
 
   useEffect(() => {
-    if (!isMounted) return;
     if (storageClassName !== activeClassName) {
       localStorage.setItem(storageKey, activeClassName);
     }
     if (paramClassName !== activeClassName) {
       router.push(`?${paramKey}=${activeClassName}`);
     }
-  }, [isMounted, activeClassName, paramClassName, storageClassName, router]);
+  }, [activeClassName, paramClassName, storageClassName, router]);
 
   return (
     <>

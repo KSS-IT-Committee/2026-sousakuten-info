@@ -1,6 +1,7 @@
 import { ClassName, isClassName } from "@/lib/classes";
 import { db } from "@/lib/db";
 
+import { CONTENTS_MAX_LENGTH, TITLE_MAX_LENGTH } from "./announcements";
 import { announcementClasses, announcements } from "./schema";
 
 export type AddAnnouncementProps = {
@@ -8,9 +9,6 @@ export type AddAnnouncementProps = {
   body: string;
   classes: ClassName[];
 };
-
-export const TITLE_MAX_LENGTH: number = 30;
-export const CONTENTS_MAX_LENGTH: number = 300;
 
 export async function addAnnouncement({
   title,

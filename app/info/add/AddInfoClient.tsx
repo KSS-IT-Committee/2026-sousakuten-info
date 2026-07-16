@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { BackLink } from "@/components/BackLink";
 import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
-import { CONTENTS_MAX_LENGTH, TITLE_MAX_LENGTH } from "@/db/addAnnouncement";
+import { CONTENTS_MAX_LENGTH, TITLE_MAX_LENGTH } from "@/db/announcements";
 import { classFormat } from "@/lib/class-format";
 import { ClassName } from "@/lib/classes";
 

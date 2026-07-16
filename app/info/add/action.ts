@@ -2,12 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 
-import {
-  addAnnouncement,
-  AddAnnouncementProps,
-  CONTENTS_MAX_LENGTH,
-  TITLE_MAX_LENGTH,
-} from "@/db/addAnnouncement";
+import { addAnnouncement, AddAnnouncementProps } from "@/db/addAnnouncement";
+import { CONTENTS_MAX_LENGTH, TITLE_MAX_LENGTH } from "@/db/announcements";
 import { requireManager } from "@/lib/authorize";
 import { isClassName } from "@/lib/classes";
 
