@@ -1,0 +1,5 @@
+{
+  "title": "added local login bypass system",
+  "description": "ローカルの開発環境でログインをバイパスする機能を追加しました。ページに変更はありません。",
+  "credits": ["@Shirym-min"]
+}

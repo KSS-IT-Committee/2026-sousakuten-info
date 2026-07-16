@@ -12,12 +12,13 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
-    "@next/third-parties": "^16.2.9",
+    "@next/third-parties": "^16.2.10",
     "drizzle-orm": "^0.45.2",
-    "next": "^16.2.9",
+    "next": "^16.2.10",
     "postgres": "^3.4.9",
     "react": "19.2.7",
     "react-dom": "19.2.4"
@@ -29,11 +30,11 @@
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.2.10",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^13.0.0",
     "eslint-plugin-unused-imports": "^4.0.0",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.5",
     "typescript": "^6"
   }
 }
