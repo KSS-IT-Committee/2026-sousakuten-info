@@ -1,5 +1,5 @@
 {
-  "title": "Reapply \"feature/auth\"",
-  "description": "TODO",
-  "credits": ["@rotarymars"]
+  "title": "認証の有効化",
+  "description": "ログイン状態によってページの表示に制限がかかります。",
+  "credits": ["@hatuna-827"]
 }
