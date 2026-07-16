@@ -1,71 +1,28 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
-import { type ReactNode, useState } from "react";
 
+import { AccountNav } from "../AccountNav";
 import styles from "./Header.module.css";
 
-const items = [
-  { text: "クラスページ", url: "/" },
-  { text: "お知らせを管理", url: "/info" },
-  { text: "お知らせを追加", url: "/info/add" },
-  { text: "ページ改善の提案", url: "/requests" },
-];
-
-type HeaderProps = {
-  // Server-rendered login control, passed in from the layout (this is a
-  // client component, so it can't render the async AccountNav itself).
-  accountSlot?: ReactNode;
-};
-
-export function Header({ accountSlot }: HeaderProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-  const closeOpen = () => {
-    setIsOpen(false);
-  };
+/**
+ * Slim top bar: the event logo linking back to the festival top site on the
+ * left, the shared login control on the right. Page navigation lives in
+ * <FloatingMenu>, not here. Unlike the shared <AccountBar>, this bar is
+ * app-local — per AccountBar's own docs, apps with a header of their own
+ * render <AccountNav /> inline in it instead.
+ */
+export function Header() {
   return (
-    <header className={`${styles.header} ${isOpen ? styles.open : ""}`}>
-      <div className={styles.container}>
-        <div className={styles.menu}>
-          <a href="https://top.2026.kss-it.com/" className={styles.home}>
-            <Image
-              src="/theme/event-week.png"
-              alt="創作展"
-              height={420}
-              width={930}
-            />
-          </a>
-          {accountSlot ? (
-            <div className={styles.account}>{accountSlot}</div>
-          ) : null}
-          <button
-            type="button"
-            className={styles.hamburger}
-            onClick={toggleOpen}
-            aria-expanded={isOpen}
-            aria-controls="header-nav"
-            aria-label="メニュー"
-          >
-            <span className={styles.bars}></span>
-          </button>
-        </div>
-        <nav id="header-nav" className={styles.nav}>
-          {items.map(({ text, url }, i) => (
-            <Link href={url} key={i} onClick={closeOpen}>
-              {text}
-            </Link>
-          ))}
-        </nav>
-        <div
-          className={styles.back}
-          onClick={closeOpen}
-          aria-label="メニューを閉じる"
-        ></div>
-      </div>
+    <header className={styles.header}>
+      <a href="https://top.2026.kss-it.com/" className={styles.home}>
+        <Image
+          src="/theme/event-week.png"
+          alt="創作展トップページ"
+          height={420}
+          width={930}
+          className={styles.logo}
+        />
+      </a>
+      <AccountNav />
     </header>
   );
 }
