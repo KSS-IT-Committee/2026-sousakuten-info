@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1777344117797,
-      "tag": "0000_init",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1777584412690,
-      "tag": "0001_unusual_satana",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1779704196263,
-      "tag": "0002_stale_iceman",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1781210333729,
-      "tag": "0003_broad_mesmero",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1781360246505,
-      "tag": "0004_strong_dragon_lord",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1784111605051,
-      "tag": "0005_nasty_morlun",
+      "when": 1784176842636,
+      "tag": "0000_gorgeous_masked_marvel",
       "breakpoints": true
     }
   ]
