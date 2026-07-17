@@ -1,3 +1,4 @@
+import { FilterGuard } from "@/components/FilterGuard";
 import { List } from "@/components/List";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
@@ -6,6 +7,14 @@ import { classFormat } from "@/lib/class-format";
 import shared from "../shared.module.css";
 
 export default async function Info() {
+  return (
+    <FilterGuard filter={{ canReadAll: true }}>
+      <InfoContent />
+    </FilterGuard>
+  );
+}
+
+async function InfoContent() {
   const [announcements, classes] = await Promise.all([
     getAllAnnouncements(),
     getAllAnnouncementClasses(),

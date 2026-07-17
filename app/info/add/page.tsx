@@ -1,7 +1,11 @@
+import { FilterGuard } from "@/components/FilterGuard";
+
 import { AddInfoClient } from "./AddInfoClient";
 
-// The form lives in <AddInfoClient>; the site-wide <FloatingMenu> is
-// rendered by the root layout.
 export default function AddInfo() {
-  return <AddInfoClient />;
+  return (
+    <FilterGuard filter={{ canManage: true }}>
+      <AddInfoClient />
+    </FilterGuard>
+  );
 }

@@ -6,10 +6,12 @@ import { useRef, useState } from "react";
 import { BackLink } from "@/components/BackLink";
 import { Button } from "@/components/Button";
 import { SelectClasses } from "@/components/SelectClasses";
+import { CONTENTS_MAX_LENGTH, TITLE_MAX_LENGTH } from "@/db/announcements";
 import { classFormat } from "@/lib/class-format";
 import { ClassName } from "@/lib/classes";
 
 import shared from "../../shared.module.css";
+import { addAnnouncementAction } from "./action";
 import styles from "./add-info.module.css";
 
 export function AddInfoClient() {
@@ -18,18 +20,24 @@ export function AddInfoClient() {
   const [classes, setClasses] = useState<ClassName[]>([]);
   const title = useRef<HTMLInputElement>(null);
   const body = useRef<HTMLTextAreaElement>(null);
-  const title_max_length = Number(30);
-  const contents_max_length = Number(150);
 
   const addAnnouncement = async () => {
     const titleText = title?.current?.value;
     const bodyContent = body?.current?.value;
-    if (typeof titleText !== "string" || titleText.length === 0) {
-      alert(`タイトルを入力してください(最大文字数:${title_max_length})`);
+    if (
+      typeof titleText !== "string" ||
+      titleText.trim().length === 0 ||
+      TITLE_MAX_LENGTH < titleText.length
+    ) {
+      alert(`タイトルを入力してください(最大文字数:${TITLE_MAX_LENGTH})`);
       return;
     }
-    if (typeof bodyContent !== "string" || bodyContent.length === 0) {
-      alert(`内容を入力してください(最大文字数:${contents_max_length})`);
+    if (
+      typeof bodyContent !== "string" ||
+      bodyContent.trim().length === 0 ||
+      CONTENTS_MAX_LENGTH < bodyContent.length
+    ) {
+      alert(`内容を入力してください(最大文字数:${CONTENTS_MAX_LENGTH})`);
       return;
     }
     if (classes.length === 0) {
@@ -39,23 +47,13 @@ export function AddInfoClient() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/announcements", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: titleText,
-          body: bodyContent,
-          classes: classes,
-        }),
+      await addAnnouncementAction({
+        title: titleText,
+        body: bodyContent,
+        classes: classes,
       });
-      if (res.ok) {
-        alert("お知らせを追加しました");
-        router.push("/info");
-      } else {
-        alert("お知らせの追加に失敗しました");
-      }
+      alert("お知らせを追加しました");
+      router.push("/info");
     } catch {
       alert("お知らせの追加に失敗しました");
     } finally {
@@ -82,7 +80,7 @@ export function AddInfoClient() {
             ref={title}
             type="text"
             placeholder="タイトルを入力"
-            maxLength={title_max_length}
+            maxLength={TITLE_MAX_LENGTH}
           />
         </div>
       </label>
@@ -93,7 +91,7 @@ export function AddInfoClient() {
             className={styles.textarea}
             ref={body}
             placeholder="お知らせ内容を入力"
-            maxLength={contents_max_length}
+            maxLength={CONTENTS_MAX_LENGTH}
           ></textarea>
         </div>
       </label>

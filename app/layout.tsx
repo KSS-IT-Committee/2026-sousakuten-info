@@ -45,8 +45,16 @@ export default function RootLayout({
         <FloatingMenu
           items={[
             { label: "クラスページ", href: "/" },
-            { label: "お知らせを管理", href: "/info" },
-            { label: "お知らせを追加", href: "/info/add" },
+            {
+              label: "お知らせを管理",
+              href: "/info",
+              filter: { canReadAll: true },
+            },
+            {
+              label: "お知らせを追加",
+              href: "/info/add",
+              filter: { canManage: true },
+            },
             { label: "ページ改善の提案", href: "/requests" },
           ]}
         />

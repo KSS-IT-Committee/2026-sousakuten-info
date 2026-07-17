@@ -18,7 +18,7 @@ export function AccountNavLink({
   // the 2026 namespace). Modifier / middle clicks fall through to the bare
   // href so open-in-new-tab keeps working; with no JS the href is the login
   // page (you just land there without a return trip).
-  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (
       event.button !== 0 ||
       event.metaKey ||
@@ -31,7 +31,7 @@ export function AccountNavLink({
     event.preventDefault();
     const next = encodeURIComponent(window.location.href);
     window.location.href = `${loginBaseUrl}?next=${next}`;
-  }
+  };
 
   const isLoggedIn = username !== null;
   return (
