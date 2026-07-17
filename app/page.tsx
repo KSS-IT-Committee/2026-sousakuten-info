@@ -19,8 +19,6 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  let className: ClassName;
-
   const user = await getCurrentUser();
   if (user === null) {
     unauthorized();
@@ -31,10 +29,28 @@ export default async function Home({ searchParams }: Props) {
     forbidden();
   }
   const userClass = classOf(user.username) ?? "";
-  className = isClassName(userClass) ? (userClass as ClassName) : "1A";
+  let className: ClassName | null = isClassName(userClass)
+    ? (userClass as ClassName)
+    : null;
   if (hasAccess(user, { canReadAll: true })) {
     const { className: paramClass = "" } = await searchParams;
-    className = isClassName(paramClass) ? (paramClass as ClassName) : className;
+    className = isClassName(paramClass)
+      ? (paramClass as ClassName)
+      : (className ?? "1A");
+  }
+  // Internal accounts with no class and no read-all access (teachers,
+  // hand-created accounts): a fallback class would show them another class's
+  // announcements and deductions, so show an empty page instead.
+  if (className === null) {
+    return (
+      <>
+        <h1 className={shared.title}>情報伝達ページ</h1>
+        <List
+          items={[]}
+          emptyMessage="クラスに所属していないアカウントのため、表示できる情報はありません"
+        />
+      </>
+    );
   }
 
   const [announcements, deductions] = await Promise.all([
