@@ -8,9 +8,13 @@ description: Build, run, and drive this Next.js app to verify changes at the bro
 ## Launch
 
 # Terminal 1: predev regenerates the changelog first.
+
 PORT=3005 npm run dev
+
 # Terminal 2:
+
 curl --fail --max-time 10 -sS http://localhost:3005/requests
+
 ```
 
 No `DATABASE_URL` is needed to render page shells, the header, or the
@@ -44,3 +48,4 @@ Playwright MCP works well. Gotchas learned:
 - Menu: hover open/close (desktop), one-tap open (touch via CDP),
   outside tap close, link click navigates + closes, Enter/Tab/Escape.
 - Header logo link (top-left) and AccountNav pill (top-right) on every page.
+```
