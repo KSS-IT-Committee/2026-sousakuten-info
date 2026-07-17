@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  let className: ClassName = "1A";
+  let className: ClassName;
 
   const user = await getCurrentUser();
   if (user === null) {
