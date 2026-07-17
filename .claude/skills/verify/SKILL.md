@@ -7,9 +7,10 @@ description: Build, run, and drive this Next.js app to verify changes at the bro
 
 ## Launch
 
-```bash
-PORT=3005 npm run dev   # predev regenerates the changelog first
-curl -s http://localhost:3005/requests   # readiness probe (DB-free page)
+# Terminal 1: predev regenerates the changelog first.
+PORT=3005 npm run dev
+# Terminal 2:
+curl --fail --max-time 10 -sS http://localhost:3005/requests
 ```
 
 No `DATABASE_URL` is needed to render page shells, the header, or the
