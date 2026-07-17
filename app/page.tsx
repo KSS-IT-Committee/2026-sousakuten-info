@@ -1,6 +1,5 @@
-import { unauthorized } from "next/navigation";
+import { forbidden, unauthorized } from "next/navigation";
 
-import { FilterGuard } from "@/components/FilterGuard";
 import { FilterInternal } from "@/components/FilterInternal";
 import { List } from "@/components/List";
 import { getAnnouncements } from "@/db/getAnnouncements";
@@ -25,6 +24,11 @@ export default async function Home({ searchParams }: Props) {
   const user = await getCurrentUser();
   if (user === null) {
     unauthorized();
+  }
+  // Page gate (FilterGuard's check, inlined): must run before the class-scoped
+  // reads below so unauthorized accounts never execute them.
+  if (!hasAccess(user, { isInternal: true })) {
+    forbidden();
   }
   const userClass = classOf(user.username) ?? "";
   className = isClassName(userClass) ? (userClass as ClassName) : "1A";
@@ -53,7 +57,7 @@ export default async function Home({ searchParams }: Props) {
   }));
 
   return (
-    <FilterGuard filter={{ isInternal: true }}>
+    <>
       <h1 className={shared.title}>情報伝達ページ</h1>
       <FilterInternal filter={{ canReadAll: true }}>
         <SelectClass />
@@ -67,6 +71,6 @@ export default async function Home({ searchParams }: Props) {
       />
       <h2 className={shared.subtitle}>減点状況</h2>
       <List items={deductionItems} emptyMessage="減点はありません" />
-    </FilterGuard>
+    </>
   );
 }
