@@ -13,17 +13,17 @@ import type { SessionUser } from "@/lib/session";
 export type Filter = {
   /** Any logged-in school account (Students / Teachers). */
   isInternal?: true;
-  /** May add / delete announcements (Sousakuten / IT). */
+  /** May add / delete announcements (Sousakuten). */
   canManage?: true;
-  /** May read announcements addressed to any class (Teachers / Sousakuten / IT). */
+  /** May read announcements addressed to any class (Sousakuten). */
   canReadAll?: true;
   role?: Role | readonly Role[];
   /** Member of one of these classes, held as G<grade> + Class<letter> roles. */
   className?: ClassName | readonly ClassName[];
 };
 
-const MANAGER_ROLES: readonly Role[] = ["Sousakuten", "IT"];
-const READ_ALL_ROLES: readonly Role[] = ["Teachers", "Sousakuten", "IT"];
+const MANAGER_ROLES: readonly Role[] = ["Sousakuten"];
+const READ_ALL_ROLES: readonly Role[] = ["Sousakuten"];
 
 export function hasAccess(user: SessionUser, filter: Filter): boolean {
   return (
