@@ -22,7 +22,7 @@ export type Filter = {
   className?: ClassName | readonly ClassName[];
 };
 
-const MANAGER_ROLES: readonly Role[] = ["Sousakuten"];
+const MANAGER_ROLES: readonly Role[] = ["SousakutenMain"];
 const READ_ALL_ROLES: readonly Role[] = ["Sousakuten"];
 
 export function hasAccess(user: SessionUser, filter: Filter): boolean {
