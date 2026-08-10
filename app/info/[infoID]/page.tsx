@@ -22,6 +22,9 @@ type Props = {
   }>;
 };
 
+// No Suspense boundary here on purpose: every await below feeds a status
+// decision — the two notFound() calls, then FilterGuard's 401/403 — so they all
+// have to run while the status line is still writable.
 export default async function InfoPage({ params, searchParams }: Props) {
   const { infoID } = await params;
   const { from } = await searchParams;

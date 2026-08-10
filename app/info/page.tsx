@@ -1,15 +1,22 @@
+import { Suspense } from "react";
+
 import { FilterGuard } from "@/components/FilterGuard";
 import { List } from "@/components/List";
+import { PageLoading } from "@/components/PageLoading";
 import { getAllAnnouncementClasses } from "@/db/getAllAnnouncementClasses";
 import { getAllAnnouncements } from "@/db/getAllAnnouncements";
 import { classFormat } from "@/lib/class-format";
 
 import shared from "../shared.module.css";
 
-export default async function Info() {
+// FilterGuard stays in the static shell so its 401/403 is still a real status
+// code; only the DB-backed listing streams behind the boundary.
+export default function Info() {
   return (
     <FilterGuard filter={{ canReadAll: true }}>
-      <InfoContent />
+      <Suspense fallback={<PageLoading />}>
+        <InfoContent />
+      </Suspense>
     </FilterGuard>
   );
 }

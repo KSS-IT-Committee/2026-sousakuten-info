@@ -1,7 +1,9 @@
 import { forbidden, unauthorized } from "next/navigation";
+import { Suspense } from "react";
 
 import { FilterInternal } from "@/components/FilterInternal";
 import { List } from "@/components/List";
+import { PageLoading } from "@/components/PageLoading";
 import { getAnnouncements } from "@/db/getAnnouncements";
 import { getDeductions } from "@/db/getDeductions";
 import { hasAccess } from "@/lib/access-filter";
@@ -53,6 +55,18 @@ export default async function Home({ searchParams }: Props) {
     );
   }
 
+  // The 401/403 above and the class derivation both run in the static shell,
+  // so the status is decided before anything streams. Only the class-scoped DB
+  // reads sit inside the Suspense boundary — keep new status interrupts out of
+  // <ClassBoard>.
+  return (
+    <Suspense fallback={<PageLoading />}>
+      <ClassBoard className={className} />
+    </Suspense>
+  );
+}
+
+async function ClassBoard({ className }: { className: ClassName }) {
   const [announcements, deductions] = await Promise.all([
     getAnnouncements(className),
     getDeductions(className),
