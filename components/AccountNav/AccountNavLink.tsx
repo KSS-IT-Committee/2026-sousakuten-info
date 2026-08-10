@@ -18,7 +18,7 @@ export function AccountNavLink({
   // the 2026 namespace). Modifier / middle clicks fall through to the bare
   // href so open-in-new-tab keeps working; with no JS the href is the login
   // page (you just land there without a return trip).
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     if (
       event.button !== 0 ||
       event.metaKey ||
@@ -30,8 +30,17 @@ export function AccountNavLink({
     }
     event.preventDefault();
     const next = encodeURIComponent(window.location.href);
-    window.location.href = `${loginBaseUrl}?next=${next}`;
-  };
+    // Resolve against the current origin so the destination is absolute either
+    // way: loginBaseUrl is a cross-origin URL in production (the shared /login
+    // on the namespace apex) but the relative "/login" in local dev and vvps.
+    // Assigning it is a full page load on purpose — the login handoff must
+    // leave this app rather than client-route within it.
+    const target = new URL(
+      `${loginBaseUrl}?next=${next}`,
+      window.location.href,
+    );
+    window.location.assign(target.toString());
+  }
 
   const isLoggedIn = username !== null;
   return (
