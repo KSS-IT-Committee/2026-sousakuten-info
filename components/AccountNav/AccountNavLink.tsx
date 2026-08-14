@@ -40,7 +40,7 @@ export function AccountNavLink({
       window.location.href,
     );
     window.location.assign(target.toString());
-  }
+  };
 
   const isLoggedIn = username !== null;
   return (
