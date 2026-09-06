@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "情報伝達ページ",
   description: "情報伝達ページ - KITeC",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/school-emblem.png",
   },
   robots: {
     index: false,
