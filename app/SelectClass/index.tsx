@@ -38,7 +38,7 @@ export function SelectClass() {
       localStorage.setItem(storageKey, activeClassName);
     }
     if (paramClassName !== activeClassName) {
-      router.push(`?${paramKey}=${activeClassName}`);
+      router.replace(`?${paramKey}=${activeClassName}`);
     }
   }, [activeClassName, paramClassName, storageClassName, router]);
 

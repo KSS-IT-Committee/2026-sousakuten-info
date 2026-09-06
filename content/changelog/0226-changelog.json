@@ -1,0 +1,5 @@
+{
+  "title": "fix back from top",
+  "description": "トップページへ遷移した場合に、戻れないバグを修正しました。",
+  "credits": ["@hatuna-827"]
+}
