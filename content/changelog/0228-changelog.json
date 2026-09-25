@@ -1,5 +1,5 @@
 {
-  "title": "adding external role",
-  "description": "TODO",
+  "title": "校外向けアカウントの権限を追加",
+  "description": "校外の方向けのアカウント用の権限（External）を追加しました。このアカウントはログインできますが、校内向けのページは閲覧できません。",
   "credits": ["@rotarymars"]
 }
