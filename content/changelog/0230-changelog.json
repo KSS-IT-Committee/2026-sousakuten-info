@@ -1,0 +1,5 @@
+{
+  "title": "Bump react, react-dom and @types/react-dom",
+  "description": "React (react / react-dom) を 19.3.0 に上げました。これによるページの変更はありません。",
+  "credits": ["@dependabot[bot]"]
+}
