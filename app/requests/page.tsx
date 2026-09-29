@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import styles from "./requests.module.css";
+import { maintainerAvatarUrl, MAINTAINERS } from "@/lib/maintainers";
 
-const MAINTAINERS = ["hatuna-827", "sakaYq4875"];
+import styles from "./requests.module.css";
 
 function MaintainerItem({ username }: { username: string }) {
   return (
@@ -13,7 +13,7 @@ function MaintainerItem({ username }: { username: string }) {
         href={`https://github.com/${username}`}
       >
         <Image
-          src={`https://github.com/${username}.png`}
+          src={maintainerAvatarUrl(username)}
           alt=""
           width={32}
           height={32}
