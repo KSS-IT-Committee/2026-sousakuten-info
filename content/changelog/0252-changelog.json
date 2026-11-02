@@ -1,0 +1,5 @@
+{
+  "title": "Bump brace-expansion from 1.1.18 to 1.1.21 in the npm_and_yarn group across 1 directory",
+  "description": "パッケージのバージョンを上げました。これによるページの変更はありません。",
+  "credits": ["@dependabot[bot]"]
+}
