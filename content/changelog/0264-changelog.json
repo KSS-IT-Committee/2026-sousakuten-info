@@ -1,5 +1,5 @@
 {
   "title": "Update Node.js to 116b800",
-  "description": "TODO",
+  "description": "Node.jsのバージョンを上げました。",
   "credits": ["@renovate[bot]"]
 }
